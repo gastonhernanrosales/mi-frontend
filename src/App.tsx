@@ -2,7 +2,7 @@ import { useState,useEffect } from 'react';
 import { User } from './type';
 import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
-import './styles/app.css';
+import './styles/App.css';
 import CashierDashboard from './pages/CashierDashboard';
 import {   Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import Pago from './pages/Pago';
