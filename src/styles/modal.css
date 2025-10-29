@@ -1,0 +1,357 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    
+    background: 
+      linear-gradient(-45deg, rgba(15, 23, 42, 0.85), rgba(6, 95, 70, 0.85), rgba(30, 58, 138, 0.85), rgba(4, 120, 87, 0.85)),
+      url('https://i.blogs.es/0baa91/39f95492-38ee-4f16-92e1-ba5161f4a958/1366_2000.jpeg'); /* 👈 poné tu imagen en public/images */
+  
+    background-size: 400% 400%, cover;
+    background-position: center;
+    animation: gradientBG 15s ease infinite;
+    backdrop-filter: blur(6px);
+    z-index: 9999;
+
+    animation: overlayFade 0.3s ease forwards;
+}
+
+@keyframes overlayFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* === Contenedor del modal === */
+.modal-content {
+    background: linear-gradient(145deg, #0c0c0c, #0561f5)!important;
+    
+    border-radius: 1.2rem;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    max-height: 100%;
+    overflow-y: auto;
+    color: #ffffff;
+    box-shadow: 0 10px 30px rgba(236, 240, 240, 0.5);
+    text-align: center;
+    max-height: none!important; /* permite que crezca libremente */
+    overflow: visible!important; /* muestra todo el contenido */
+    animation: modalSlideIn 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+    transform-origin: center;
+}
+.modal-content, .modal-form input {
+    box-sizing: border-box;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+        filter: blur(3px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* === Título === */
+.modal-content h3 {
+    font-size: 1.5rem!important;
+    font-weight: 600;
+    color: #c9c7ca;
+    text-shadow: 0 0 6px rgba(0, 242, 170, 0.4);
+    margin-bottom: 1rem;
+}
+
+/* === Inputs === */
+.modal-form input {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.95rem!important;
+    border-radius: 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(196, 10, 10, 0.08);
+    color: #f1f1f1;
+    outline: none;
+    transition: all 0.25s ease;
+}
+
+.modal-form input:focus {
+    border-color: #2d9774;
+    box-shadow: 0 0 12px rgba(0, 242, 170, 0.4);
+}
+
+/* === Botones === */
+.modal-buttons {
+    padding: 0.6rem 1.5rem;
+    border-radius: 0.8rem;
+
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem!important;
+    margin-top: 1rem!important ;
+}
+
+.btn-save, .btn-cancel, .btn-leer-codigo {
+    flex: 1;
+    padding: 0.7rem 1rem;
+    border-radius: 0.8rem;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.btn-save {
+    
+    background: linear-gradient(90deg, #22c55e, #4ade80)!important;
+    color: #f6f7fa!important;
+
+}
+
+.btn-save:hover {
+    box-shadow: 0 0 15px #00f2aa;
+    transform: translateY(-2px) scale(1.03);
+}
+
+.btn-cancel {
+    background: linear-gradient(90deg, #dc2626, #ef4444)!important;
+    
+    color: #fff;
+}
+
+.btn-cancel:hover {
+    box-shadow: 0 0 15px #3c93bb;
+    transform: translateY(-2px) scale(1.03);
+}
+
+.btn-leer-codigo {
+    background: linear-gradient(90deg, #969595, #6abed8);
+    color: white;
+}
+
+.btn-leer-codigo:hover {
+    box-shadow: 0 0 15px #3b82f6!important;
+    transform: translateY(-2px) scale(1.03);
+}
+
+/* === Responsive === */
+@media (max-width: 500px) {
+    .modal-content {
+        padding: 1.5rem;
+    }
+    .modal-content h3 {
+        font-size: 1.3rem;
+    }
+}
+
+/* === Ticket === */
+.modal-ticket {
+    background: white;
+    padding: 12px;
+    border-radius: 8px;
+    width: 280px;
+    text-align: left;
+    font-family: monospace;
+    color: black;
+    box-shadow: 0 0 10px rgba(0,0,0,0.25);
+  }
+  
+  .ticket {
+    font-size: 13px;
+    line-height: 1.3;
+  }
+  
+  .ticket h2 {
+    text-align: center;
+    margin: 0;
+    font-size: 16px;
+  }
+  
+  .ticket .titulo {
+    text-align: center;
+    margin: 4px 0 10px;
+    font-size: 13px;
+  }
+  
+  .ticket h4 {
+    margin: 6px 0;
+    font-size: 13px;
+    text-decoration: underline;
+  }
+  
+  /* Encabezado de productos */
+  .ticket-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    font-weight: bold;
+    border-bottom: 1px solid black;
+    font-size: 12px;
+  }
+  
+  .ticket-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    font-size: 12px;
+  }
+  
+  .ticket-item span:nth-child(1) { text-align: left; }
+  .ticket-item span:nth-child(4) { text-align: right; }
+  
+  /* Total */
+  .ticket .total {
+    text-align: right;
+    font-size: 13px;
+    margin-top: 5px;
+  }
+  
+  /* Gracias */
+  .ticket .gracias {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  /* Botón cerrar */
+  .cerrar-btn {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 8px;
+    background-color: #111827;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.25s ease;
+  }
+  
+  .cerrar-btn:hover {
+    background-color: #2563eb;
+  }
+  
+  /* === Fondo del modal === */
+.modall {
+    position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  overflow: hidden;
+  }
+  
+  /* === Contenido del modal (ticket) === */
+  .modal-content.ticket {
+    background: white!important; 
+    
+    width: 58mm!important; /* tamaño típico de ticket */
+    top: 0;
+    left: 0;
+    padding: 10px 8px;
+    border-radius: 4px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+    font-family: monospace; 
+    font-size: 12px;
+    line-height: 1.3; 
+    color: #000;
+    overflow: hidden;
+    text-align: left;
+    margin: 0 auto; /* centrado */
+    
+  }
+  
+  .modal-content.ticket h2,
+  .modal-content.ticket h4,
+  .modal-content.ticket p {
+    margin: 4px 0;
+    text-align: center;
+  }
+  
+  .modal-content.ticket hr {
+    border: none;
+    border-top: 1px dashed #000;
+    margin: 6px 0;
+  }
+  
+  /* === Botón cerrar === */
+  .modal-content.ticket button {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+    padding: 6px;
+    border: none;
+    border-radius: 3px;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .modal-content.ticket button:hover {
+    background-color: #0056b3;
+  }
+  @media screen {
+    html, body {
+      overflow: hidden; /* evita scroll general */
+    }
+  }
+  
+  /* === Preparar para impresión === */
+  @media print {
+    body * {
+      visibility: hidden!important;
+    }
+  
+    .modal-content.ticket,
+    .modal-content.ticket * {
+      visibility: visible!important;
+    }
+  
+    .modal-content.ticket {
+      position: absolute;
+      left: 0;
+      top: 0;
+      box-shadow: none;
+      width: 80mm;
+    }
+  
+    .modal {
+      background: none!important;
+    }
+  
+    .modal-content.ticket button {
+      display: none; /* no imprimir botón */
+    }
+    /* 🔥 Esta parte corta la página justo al final del ticket */
+  html,
+  body {
+    width: 58mm;
+    height: auto;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+    overflow: hidden!important;
+  }
+  @page {
+    size: 58mm auto!important; /* o 80mm según tu impresora */
+    margin: 0!important;
+  }
+  }

@@ -1,0 +1,213 @@
+/* Fondo con degradado animado y partículas */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  
+    /* Imagen + degradado superpuesto */
+    background: 
+      linear-gradient(-45deg, rgba(15, 23, 42, 0.85), rgba(6, 95, 70, 0.85), rgba(30, 58, 138, 0.85), rgba(4, 120, 87, 0.85)),
+      url('https://i.blogs.es/0baa91/39f95492-38ee-4f16-92e1-ba5161f4a958/1366_2000.jpeg'); /* 👈 poné tu imagen en public/images */
+  
+    background-size: 400% 400%, cover;
+    background-position: center;
+    animation: gradientBG 15s ease infinite;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  @keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
+  
+  /* Partículas */
+  .background-particles .particle {
+    position: absolute;
+    background: rgba(255,255,255,0.3);
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    animation: float 12s linear infinite;
+  }
+  
+  @keyframes float {
+    0% { transform: translateY(0) rotate(0deg);}
+    50% { transform: translateY(-40px) rotate(180deg);}
+    100% { transform: translateY(0) rotate(360deg);}
+  }
+  
+  /* Card del login */
+  .login-card {
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    padding: 3rem 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    color: #fff;
+    animation: fadeIn 1.2s ease forwards;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .login-card h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .login-card .subtitle {
+    font-size: 0.9rem;
+    color: #d1d5db;
+    margin-bottom: 2rem;
+  }
+  
+  /* Avatar circular */
+  .login-avatar {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #10b981;
+    color: #fff;
+    padding: 14px;
+    border-radius: 50%;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+  }
+  
+  /* Inputs */
+  .input-group {
+    position: relative;
+    margin-bottom: 1.8rem;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 2.8rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    outline: none;
+    font-size: 1rem;
+  }
+  
+  .input-group input::placeholder {
+    color: transparent;
+  }
+  
+  .input-group input:focus {
+    border-color: #10b981;
+    box-shadow: 0 0 10px rgba(16,185,129,0.5);
+  }
+  
+  /* Labels flotantes */
+  .input-group label {
+    position: absolute;
+    left: 2.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 0.9rem;
+    transition: 0.3s;
+    pointer-events: none;
+  }
+  
+  .input-group input:focus + label,
+  .input-group input:not(:placeholder-shown) + label {
+    top: -8px;
+    font-size: 0.75rem;
+    color: #10b981;
+    background: rgba(0,0,0,0.4);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+  
+  /* Iconos */
+  .icon-left {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: #ccc;
+  }
+  
+  /* Ojito */
+  .password-container .show-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #ccc;
+    transition: color 0.2s;
+  }
+  
+  .password-container .show-password:hover {
+    color: #fff;
+  }
+  
+  /* Error */
+  .error-msg {
+    color: #f87171;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Opciones */
+  .login-options {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+    color: #d1d5db;
+  }
+  
+  .login-options a {
+    color: #93c5fd;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  
+  .login-options a:hover {
+    color: #fff;
+  }
+  
+  /* Botón */
+  .btn-login {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(90deg, #10b981, #059669);
+    border: none;
+    border-radius: 0.75rem;
+    color: white;
+    font-weight: bold;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .btn-login:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(16,185,129,0.4);
+  }
+  
+  /* Responsive */
+  @media (max-width: 500px) {
+    .login-card {
+      padding: 2rem 1.5rem;
+      margin: 1rem;
+    }
+    .login-card h2 {
+      font-size: 1.5rem;
+    }
+  }

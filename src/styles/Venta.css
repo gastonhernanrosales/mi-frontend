@@ -1,0 +1,125 @@
+.venta-container {
+    padding: 20px;
+    color: #fff;
+    background: #0d3b36;
+    min-height: 100vh;
+  }
+  
+  .venta-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  .venta-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .venta-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    flex: 1;
+  }
+  
+  .venta-btn {
+    padding: 8px 16px;
+    background: #39a770;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .venta-btn:hover {
+    background: #337c64;
+  }
+  
+  .venta-empty {
+    margin-top: 10px;
+  }
+  
+  .venta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  
+  .venta-card {
+    background: #12463f;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .venta-img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+  }
+  
+  .venta-info {
+    padding: 12px;
+  }
+  
+  .venta-info h3 {
+    margin: 0 0 8px;
+  }
+  
+  .venta-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  
+  .venta-qty {
+    width: 60px;
+    padding: 4px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .venta-remove {
+    background: #ff5a5a;
+    border: none;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .venta-remove:hover {
+    background: #e04a4a;
+  }
+  
+  .venta-subtotal {
+    margin-top: 6px;
+    font-weight: bold;
+  }
+  
+  .venta-total {
+    color:white!important;
+    margin-top: 20px;
+    text-align: right;
+    font-size: 40px;
+    font-weight: bold;
+  }
+  
+  .venta-finalizar {
+    display: block;
+    margin-top: 20px;
+    padding: 12px 20px;
+    background: #1e5e8c;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .venta-finalizar:hover {
+    background: #154b6b;
+  }

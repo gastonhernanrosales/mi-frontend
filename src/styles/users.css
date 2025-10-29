@@ -1,0 +1,275 @@
+/* Página de usuarios */
+.users-page {
+    padding: 2rem;
+    color: #fff;
+  }
+  
+  /* Header con título y botón agregar */
+  .users-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .btn-add {
+    background: linear-gradient(90deg, #10b981, #059669);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .btn-add:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+  }
+  
+  /* Grid de usuarios */
+  .users-grid {
+    display: grid;
+    gap: 20px; 
+    justify-content: flex-start;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  /* Tarjeta de usuario */
+  .user-card {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: center;
+    justify-content: space-between;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .user-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(16,185,129,0.4);
+  }
+  
+  /* Avatar circular */
+  .user-avatar {
+    background: #10b981;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Información del usuario */
+  .user-info {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+  }
+  .user-name { font-weight: bold; }
+  .user-email { font-size: 0.85rem; color: #d1d5db; }
+  .user-role.admin { color: #f87171; font-weight: bold; }
+  .user-role.user { color: #93c5fd; font-weight: bold; }
+  
+  /* Botones dentro de la tarjeta */
+  .user-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .btn-edit {
+    background: #3b82f6;
+    border: none;
+    color: white;
+    padding: 0.3rem 0.5rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .btn-edit:hover { 
+    background: #2563eb; 
+    transform: scale(1.05);
+  }
+  .btn-delete {
+    background: #ef4444;
+    border: none;
+    color: white;
+    padding: 0.3rem 0.5rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .btn-delete:hover { 
+    background: #b91c1c; 
+    transform: scale(1.05);
+  }
+  
+  /* Modal */
+ /* === Overlay (fondo difuminado) === */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  
+  background: 
+      linear-gradient(-45deg, rgba(15, 23, 42, 0.85), rgba(6, 95, 70, 0.85), rgba(30, 58, 138, 0.85), rgba(4, 120, 87, 0.85)),
+      url('https://i.blogs.es/0baa91/39f95492-38ee-4f16-92e1-ba5161f4a958/1366_2000.jpeg'); /* 👈 poné tu imagen en public/images */
+  
+    background-size: 400% 400%, cover;
+    background-position: center;
+    animation: gradientBG 15s ease infinite;
+    
+  backdrop-filter: blur(6px);
+  z-index: 9999;
+
+  animation: overlayFade 0.3s ease forwards;
+}
+
+@keyframes overlayFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* === Contenedor del modal === */
+.modal-content {
+  
+  background: linear-gradient(145deg, #0c0c0c, #0561f5)!important;
+  border-radius: 1.2rem;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  max-height: 100%;
+  overflow-y: auto;
+  color: #f8f5f5;
+  box-shadow: 0 10px 30px rgba(236, 240, 240, 0.5);
+  text-align: center;
+
+  animation: modalSlideIn 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-origin: center;
+}
+.modal-content, .modal-form input {
+  box-sizing: border-box;
+}
+
+@keyframes modalSlideIn {
+  from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.95);
+      filter: blur(3px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+  }
+}
+
+/* === Título === */
+.modal-content h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #f1eded;
+  text-shadow: 0 0 6px rgba(0, 242, 170, 0.4);
+  margin-bottom: 1rem;
+}
+
+/* === Inputs === */
+.modal-form input {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.95rem;
+  border-radius: 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(196, 10, 10, 0.08);
+  color: #ffffff;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.modal-form input:focus {
+  border-color: #2d9774;
+  box-shadow: 0 0 12px rgba(0, 242, 170, 0.4);
+}
+
+/* === Botones === */
+.modal-buttons {
+  padding: 0.6rem 1.5rem;
+    border-radius: 0.8rem;
+
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 4rem!important;
+    margin-top: 1rem!important ;
+}
+
+.btn-save, .btn-cancel {
+  flex: 1;
+  padding: 0.7rem 1rem !important;
+  border-radius: 0.8rem;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-save {
+  background: linear-gradient(90deg, #00f2aa, #04c2a1);
+  color: #0f172a;
+}
+
+.btn-save:hover {
+  box-shadow: 0 0 15px #00f2aa;
+  transform: translateY(-2px) scale(1.03);
+}
+
+.btn-cancel {
+  background: linear-gradient(90deg, #ef4444, #b91c1c);
+  color: #fff;
+}
+
+.btn-cancel:hover {
+  box-shadow: 0 0 15px #ef4444;
+  transform: translateY(-2px) scale(1.03);
+}
+
+.btn-leer-codigo {
+  background: linear-gradient(90deg, #969595, #6abed8);
+  color: white;
+}
+
+.btn-leer-codigo:hover {
+  box-shadow: 0 0 15px #3b82f6;
+  transform: translateY(-2px) scale(1.03);
+}
+
+/* === Responsive === */
+@media (max-width: 500px) {
+  .modal-content {
+      padding: 1.5rem;
+  }
+  .modal-content h3 {
+      font-size: 1.3rem;
+  }
+}
+  

@@ -1,0 +1,25 @@
+.misventas-container {
+    padding: 30px;
+    color: #fff;
+  }
+  
+  .ventas-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .ventas-table th,
+  .ventas-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #444;
+  }
+  
+  .ventas-table th {
+    background-color: #006d5b;
+  }
+  
+  .ventas-table tr:hover {
+    background-color: #004c3f;
+  }
