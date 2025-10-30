@@ -3,6 +3,7 @@ import { Mail, Lock, User } from 'lucide-react';
 import { User as UserType } from '../type';
 import '../styles/App.css';
 import { useNavigate } from "react-router-dom";
+import { API_URL } from '../config';
 
 interface LoginProps {
   setUser: (user: UserType) => void;
@@ -21,7 +22,7 @@ export default function Login({ setUser }: LoginProps) {
     setLoading(true);
 
     try {
-      const response = await fetch("https://localhost:7189/api/Auth/login", {
+      const response = await fetch(`${API_URL}/api/Auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
