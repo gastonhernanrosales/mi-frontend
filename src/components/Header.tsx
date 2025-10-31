@@ -9,11 +9,14 @@ interface HeaderProps {
 export default function Header({ user, toggleSidebar }: HeaderProps) {
   return (
     <header className="header">
-      <button className="hamburger" onClick={toggleSidebar}>☰</button>
-      <div>
+      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        <button className="hamburger" onClick={toggleSidebar}>☰</button>
         <h1>Bienvenido{user ? `, ${user.name}` : ''}</h1>
-        <p className="role">{user.role.toUpperCase()}</p>
       </div>
+      <span className="role-badge">
+        {user.role.toUpperCase()}
+      </span>
+      
     </header>
   );
 }
