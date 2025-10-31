@@ -149,9 +149,13 @@
 
 /* === CARDS === */
 .card-grid {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+  
 }
 
 .card {
@@ -190,4 +194,11 @@
   .header h1 {
     font-size: 1rem;
   }
+  
 }
+
+
+@media (min-width: 769px) {
+  .menu-toggle {
+    display: none;
+  }}
