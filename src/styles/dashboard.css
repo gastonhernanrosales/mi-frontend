@@ -1,141 +1,193 @@
-/* Layout general */
+/* === FONDO GENERAL === */
 .dashboard-layout {
-    display: flex;
-    min-height: 100vh;
-    height: auto ;
-    background: linear-gradient(-45deg, #0f172a, #065f46, #1e3a8a, #047857);
-    background-size: 400% 400%;
-    animation: gradientBG 18s ease infinite;
-    color: #fff;
-    font-family: 'Poppins', sans-serif;
-    position: relative;
-    overflow:  visible ;
-  }
-  
-  /* Animación fondo degradado */
-  @keyframes gradientBG {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-  }
-  
-  /* Partículas flotantes */
-  .background-particles .particle {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.25);
-    border-radius: 50%;
-    width: 10px;
-    height: 10px;
-    animation: float 14s linear infinite;
-  }
-  
-  @keyframes float {
-    0% { transform: translateY(0) rotate(0deg);}
-    50% { transform: translateY(-50px) rotate(180deg);}
-    100% { transform: translateY(0) rotate(360deg);}
-  }
-  
-  /* Sidebar glassmorphism */
+  display: flex;
+  min-height: 100vh;
+  height: auto;
+  background: linear-gradient(-45deg, #0f172a, #065f46, #1e3a8a, #047857);
+  background-size: 400% 400%;
+  animation: gradientBG 18s ease infinite;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animación del fondo */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* === PARTICULAS DECORATIVAS === */
+.background-particles .particle {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  animation: float 14s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-50px) rotate(180deg); }
+  100% { transform: translateY(0) rotate(360deg); }
+}
+
+/* === HEADER === */
+.header {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 60px;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  z-index: 50;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.header h1 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.role-badge {
+  background: #16a34a;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* === SIDEBAR === */
+.sidebar {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 240px;
+  height: calc(100% - 60px);
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(14px);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  z-index: 40;
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.4);
+}
+
+.sidebar .logo {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #f1f5f9;
+}
+
+.sidebar nav button {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: #ddd;
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sidebar nav button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(6px);
+}
+
+.sidebar nav .logout {
+  margin-top: auto;
+  color: #ff6b6b;
+}
+
+/* === OVERLAY MOBILE === */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 30;
+}
+
+.overlay.active {
+  display: block;
+}
+
+/* === CONTENIDO PRINCIPAL === */
+.main-content {
+  margin-top: 60px;
+  margin-left: 240px;
+  padding: 2rem;
+  flex: 1;
+  z-index: 2;
+  overflow-y: auto;
+  transition: margin-left 0.3s ease;
+}
+
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* === CARDS === */
+.card-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  transition: transform 0.2s, background 0.3s;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.card:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
   .sidebar {
-    width: 240px;
-    background: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(14px);
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    z-index: 2;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
   }
-  
-  .sidebar .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 2rem;
-    text-align: center;
+
+  .sidebar.open {
+    transform: translateX(0);
   }
-  
-  .sidebar nav button {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: transparent;
-    border: none;
-    color: #ddd;
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
+
+  .main-content {
+    margin-left: 0;
   }
-  
-  .sidebar nav button:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateX(6px);
-  }
-  
-  .sidebar nav .logout {
-    margin-top: auto;
-    color: #ff6b6b;
-  }
-  
-  /* Header glassmorphism */
-  .header {
-    background: rgba(0, 0, 0, 0.35);
-    backdrop-filter: blur(12px);
-    padding: 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 2;
-  }
-  
+
   .header h1 {
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: 1rem;
   }
-  
-  .header .role {
-    background: #16a34a;
-    padding: 0.25rem 0.75rem;
-    border-radius: 12px;
-    font-size: 0.85rem;
-  }
-  
-  /* Contenido */
-  .dashboard-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    z-index: 2;
-    overflow-y: auto;
-  }
-  
-  main {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-    padding: 2rem;
-  }
-  
-  .card-grid {
-    display: grid;
-    gap: 1.5rem;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  }
-  
-  .card {
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
-    padding: 2rem;
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: 500;
-    transition: transform 0.2s, background 0.3s;
-    cursor: pointer;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-  }
-  
-  .card:hover {
-    transform: scale(1.05);
-    background: rgba(255, 255, 255, 0.22);
-  }
+}

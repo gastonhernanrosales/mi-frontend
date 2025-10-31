@@ -1,4 +1,4 @@
-import '../styles/panel.css'; // 👈 importa los estilos del panel
+import '../styles/dashboard.css'; // 👈 importa los estilos del panel
 import { ReactNode, useState } from 'react';
 import Header from './Header';
 import Sidebar from './Sidebar';
