@@ -171,7 +171,7 @@ const ManageProducts: React.FC<ProductsProps> = ({ userRole }) => {
       CategoriaId: form.categoriaId,
     };
 
-    const res = await fetch(API_URL, {
+    const res = await fetch(APII_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
@@ -262,7 +262,7 @@ const ManageProducts: React.FC<ProductsProps> = ({ userRole }) => {
   const handleDelete = async (id: number) => {
     if (!confirm("¿Eliminar este producto?")) return;
     try {
-      const res = await fetch(`${API_URL}/DeleteProducto/${id}`, { method: "DELETE" });
+      const res = await fetch(`${APII_URL}/DeleteProducto/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error("Error al borrar producto");
       setProducts((prev) => prev.filter((p) => p.id !== id));
     } catch (err) {

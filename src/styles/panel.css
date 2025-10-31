@@ -1,0 +1,82 @@
+/* === PANEL / DASHBOARD LAYOUT === */
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 60px;
+  background: #333;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 10;
+}
+
+.header .hamburger {
+  display: none; /* solo visible en móvil */
+  margin-right: 10px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 250px;
+  height: calc(100% - 60px);
+  background: #444;
+  color: white;
+  padding: 20px;
+  transition: transform 0.3s ease;
+  z-index: 9;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  z-index: 8;
+}
+
+.overlay.active {
+  display: block;
+}
+
+/* Contenido principal */
+.main-content {
+  margin-top: 60px;
+  margin-left: 250px;
+  padding: 20px;
+  flex: 1;
+}
+
+/* Responsive (móviles) */
+@media (max-width: 768px) {
+  .header .hamburger {
+    display: block;
+  }
+
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+}

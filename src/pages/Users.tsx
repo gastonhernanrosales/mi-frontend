@@ -33,6 +33,7 @@ export default function Users() {
       setLoading(true);
       setError('');
       const token = localStorage.getItem("token");
+      console.log("Token usado:", token);
       if (!token) {
         setError('No se encontró token, inicia sesión nuevamente.');
         setLoading(false);
