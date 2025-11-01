@@ -138,10 +138,13 @@
 .main-content {
   display: flex;
   justify-content: center;
+  align-items: flex-start;
   margin-top: 60px;
   margin-left: 240px;
   padding: 2rem;
   flex: 1;
+  width: calc(100% - 240px); /* ✅ fuerza a ocupar todo el ancho libre */
+  min-height: calc(100vh - 60px);
   z-index: 2;
   overflow-y: auto;
   transition: margin-left 0.3s ease;
