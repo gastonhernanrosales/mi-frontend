@@ -15,7 +15,7 @@ export default function Sidebar({ role, logout, isOpen, closeSidebar }: SidebarP
   return (
     <>
       <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
-        <h2 className="logo">Sistema de Ventas Eterlinda</h2>
+        <h2 className="logo">Sistema de Ventas #TWstore</h2>
         <nav>
           <button onClick={() => { navigate(role === 'admin' ? '/admin' : '/cajero'); closeSidebar(); }}>
             <Home /> Inicio
