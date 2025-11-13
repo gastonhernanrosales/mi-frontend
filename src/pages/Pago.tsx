@@ -87,7 +87,7 @@ export default function Pago() {
       if (!token) return alert("No se encontró token. Inicia sesión de nuevo.");
 
       // Crear pago en backend
-      const pagoResponse = await fetch(`${API_URL}/CrearPago`, {
+      const pagoResponse = await fetch(`${APII_URL}/CrearPago`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
