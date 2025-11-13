@@ -71,7 +71,7 @@ function AppRoutes({ user, setUser }: { user: User | null; setUser: (u: User | n
       </Route>
 
       {/* Default */}
-      <Route path="*" element={<Navigate to={user ? (user.role === 'admin' ? '/admin' : '/cajero') : '/login'} replace />} />
+      <Route path="*" element={<Navigate to="/login" replace />} /> 
     </Routes>
   );
   
