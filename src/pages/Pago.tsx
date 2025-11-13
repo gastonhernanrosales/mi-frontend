@@ -295,7 +295,7 @@ export default function Pago() {
   <div className="modall">
     <div className="modal-content success ticket"style={{ fontFamily: "monospace", fontSize: "13px" }}>
       <div className="ticket" id="ticket">
-        <h2>Eterlinda</h2>
+        <h2>#TWstore</h2>
         <p className="titulo">🧾 Ticket de Venta</p>
 
         <p><strong>ID Venta:</strong> {ventaRegistradaId}</p>
