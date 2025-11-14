@@ -98,8 +98,7 @@ export default function Venta({ user, logout }: Props)
 
   const total = cart.reduce((s, c) => s + c.precio * c.qty, 0);
   
-  console.log(total);
-  console.log(updateQty)
+  
   return (
     <div className="venta-container">
       <h1 className="venta-title">Nueva Venta</h1>
@@ -147,7 +146,7 @@ export default function Venta({ user, logout }: Props)
                     value={item.qty}
                     className="venta-qty"
                     onChange={e => updateQty(item.id, Number(e.target.value))}
-                    onClick={e => e.stopPropagation()}
+                    
                   />
                   <button
                     className="venta-remove"
