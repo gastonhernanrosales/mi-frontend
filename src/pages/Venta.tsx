@@ -161,7 +161,7 @@ export default function Venta({ user, logout }: Props)
         </div>
       )}
 
-      <div className="venta-total">Total: ${total.toFixed(0)}</div>
+      <div className="venta-total">Total: ${total.toFixed(2)}</div>
 
       <button
         className="venta-finalizar"
