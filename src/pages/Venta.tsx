@@ -86,9 +86,11 @@ export default function Venta({ user, logout }: Props)
   };
 
   const updateQty = (id: number, qty: number) => {
-    if (!qty || qty < 1) qty = 1;
-    setCart(cart.map(c => (c.id === id ? { ...c, qty } : c)));
-  };
+  const finalQty = Number(qty);
+  setCart(cart.map(c =>
+    c.id === id ? { ...c, qty: isNaN(finalQty) || finalQty < 1 ? 1 : finalQty } : c
+  ));
+};
 
   const removeItem = (id: number) => {
     setCart(cart.filter(c => c.id !== id));
@@ -124,8 +126,8 @@ export default function Venta({ user, logout }: Props)
         <p className="venta-empty">No hay productos en la venta.</p>
       ) : (
         <div className="venta-grid">
-          {cart.map(item => (
-            <div key={item.id} className="venta-card">
+          {cart.map((item,index) => (
+            <div key={`${item.id}-${index}`} className="venta-card">
               <img
                 src={item.imageUrl}
                 alt={item.nombre}
@@ -142,10 +144,8 @@ export default function Venta({ user, logout }: Props)
                     min={1}
                     value={item.qty}
                     className="venta-qty"
-                    onChange={e => {
-                      const value = Number(e.target.value);
-                      updateQty(item.id, value);
-                    }}
+                    onChange={e => updateQty(item.id, Number(e.target.value))}
+                    onClick={e => e.stopPropagation()}
                   />
                   <button
                     className="venta-remove"
