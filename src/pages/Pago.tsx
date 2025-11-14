@@ -327,7 +327,9 @@ export default function Pago() {
 
         <p className="total"><strong>Total:</strong> ${total.toFixed(0)}</p>
 
-        <p className="gracias">¡Gracias por su compra!</p>
+        <p className="gracias">Gracias por elegir #TWstore ¡Nos encanta tenerte como cliente!😁❤️</p>
+        <p className="gracias">Si esto fuera una reseña, te daríamos 5 estrellas ⭐⭐⭐⭐⭐ 😂</p>
+        <p style={{ height: "60px" }}></p>
       </div>
 
       {/* Botón visible solo en pantalla */}
@@ -336,7 +338,7 @@ export default function Pago() {
       </button>
       <button
         className="cerrar-btn"
-        onClick={() => navigate("/home")}
+        onClick={() => navigate("/cajero")}
       >
         Cerrar
       </button>

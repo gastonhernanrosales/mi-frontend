@@ -297,4 +297,8 @@
     display: none; /* no imprimir botón */
   }
 }
-  
+.gracias {
+  text-align: center;
+  margin-top: 6px;
+  font-size: 14px;
+}
