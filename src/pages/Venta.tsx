@@ -86,6 +86,7 @@ export default function Venta({ user, logout }: Props)
   };
 
   const updateQty = (id: number, qty: number) => {
+    if (!qty || qty < 1) qty = 1;
     setCart(cart.map(c => (c.id === id ? { ...c, qty } : c)));
   };
 
@@ -141,9 +142,10 @@ export default function Venta({ user, logout }: Props)
                     min={1}
                     value={item.qty}
                     className="venta-qty"
-                    onChange={e =>
-                      updateQty(item.id, parseInt(e.target.value))
-                    }
+                    onChange={e => {
+                      const value = Number(e.target.value);
+                      updateQty(item.id, value);
+                    }}
                   />
                   <button
                     className="venta-remove"
