@@ -94,8 +94,7 @@ export default function Venta({ user, logout }: Props)
   };
 
   const total = cart.reduce((s, c) => s + c.precio * c.qty, 0);
-  console.log("PRECIO DE CADA PRODUCTO:", cart.map(c => c.precio));
-  console.log("TYPES:", cart.map(c => typeof c.precio));
+  
   return (
     <div className="venta-container">
       <h1 className="venta-title">Nueva Venta</h1>
