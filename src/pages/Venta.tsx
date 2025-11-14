@@ -93,7 +93,7 @@ export default function Venta({ user, logout }: Props)
     setCart(cart.filter(c => c.id !== id));
   };
 
-  const total = cart.reduce((s, c) => s + Number(c.precio) * c.qty, 0);
+  const total = cart.reduce((s, c) => s + c.precio * c.qty, 0);
   
   return (
     <div className="venta-container">
@@ -134,7 +134,7 @@ export default function Venta({ user, logout }: Props)
                 <h3>{item.nombre}</h3>
                 <p>{item.descripcion}</p>
                 <p><b>Código:</b> {item.codigoBarras}</p>
-                <p><b>Precio:</b> ${item.precio.toFixed(2)}</p>
+                <p><b>Precio:</b> ${item.precio.toFixed(0)}</p>
                 <div className="venta-actions">
                   <input
                     type="number"
@@ -153,7 +153,7 @@ export default function Venta({ user, logout }: Props)
                   </button>
                 </div>
                 <p className="venta-subtotal">
-                  Subtotal: ${Number(item.precio * item.qty).toFixed(0)}
+                  Subtotal: ${(item.precio * item.qty).toFixed(0)}
                 </p>
               </div>
             </div>
@@ -161,7 +161,7 @@ export default function Venta({ user, logout }: Props)
         </div>
       )}
 
-      <div className="venta-total">Total: ${total.toFixed(2)}</div>
+      <div className="venta-total">Total: ${total.toFixed(0)}</div>
 
       <button
         className="venta-finalizar"
