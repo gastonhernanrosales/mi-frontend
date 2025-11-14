@@ -97,7 +97,9 @@ export default function Venta({ user, logout }: Props)
   };
 
   const total = cart.reduce((s, c) => s + c.precio * c.qty, 0);
+  
   console.log(total);
+  console.log(updateQty)
   return (
     <div className="venta-container">
       <h1 className="venta-title">Nueva Venta</h1>
@@ -156,6 +158,7 @@ export default function Venta({ user, logout }: Props)
                 </div>
                 <p className="venta-subtotal">
                   Subtotal: ${(item.precio * item.qty).toFixed(0)}
+                  
                 </p>
               </div>
             </div>
