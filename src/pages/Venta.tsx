@@ -18,6 +18,7 @@ type Product = {
   stock: number;
   codigoBarras: string;
   imageUrl: string;
+  categoriaNombre?: string; // 🔥 NUEVO (por si lo trae el back)
 };
 
 interface CartItem extends Product {
@@ -31,6 +32,7 @@ export default function Venta({ user, logout }: Props)
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [search, setSearch] = useState(""); // 🔥 NUEVO — buscador universal
   const navigate = useNavigate();
 
 
@@ -84,6 +86,28 @@ export default function Venta({ user, logout }: Props)
     }
     setBarcode("");
   };
+  // 🔥 NUEVO — Agregar producto desde búsqueda
+  const addProductFromSearch = (product: Product) => {
+    const exists = cart.find((c) => c.id === product.id);
+
+    if (exists) {
+      setCart(
+        cart.map((c) =>
+          c.id === product.id ? { ...c, qty: c.qty + 1 } : c
+        )
+      );
+    } else {
+      setCart([...cart, { ...product, qty: 1 }]);
+    }
+
+    setSearch(""); // limpio el buscador
+  };
+  // 🔥 NUEVO — Filtrado por todo
+  const productosFiltrados = products.filter((p) =>
+    `${p.nombre} ${p.descripcion} ${p.codigoBarras} ${p.categoriaNombre}`
+      .toLowerCase()
+      .includes(search.toLowerCase())
+  );
 
   const updateQty = (id: number, qty: number) => {
   const finalQty = Number(qty);
@@ -119,6 +143,33 @@ export default function Venta({ user, logout }: Props)
           Agregar
         </button>
       </div>
+      {/* 🔥 NUEVO — Buscador universal */}
+      <div className="venta-form">
+        <input
+          className="venta-input"
+          placeholder="Buscar por nombre, descripción, código o categoría"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
+      {/* 🔥 NUEVO — Resultados del buscador */}
+      {search.length > 0 && (
+        <div className="venta-search-results">
+          {productosFiltrados.slice(0, 10).map((p) => (
+            <div key={p.id} className="venta-search-item">
+              <span>
+                {p.nombre} — ${p.precio} ({p.categoriaNombre})
+              </span>
+              <button
+                className="venta-search-add"
+                onClick={() => addProductFromSearch(p)}
+              >
+                Agregar
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
 
       {loading && <p>Cargando productos...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
