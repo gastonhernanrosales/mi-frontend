@@ -123,3 +123,18 @@
   .venta-finalizar:hover {
     background: #154b6b;
   }
+  /* Botón agregar */
+.btn-add-search {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-add-search:hover {
+  background: #218838;
+}

@@ -160,11 +160,12 @@ export default function Venta({ user, logout }: Props)
               <span>
                 {p.nombre} — ${p.precio} ({p.categoriaNombre})
               </span>
+              <small className="search-desc">{p.descripcion}</small>
               <button
-                className="venta-search-add"
+                className="btn-add-search"
                 onClick={() => addProductFromSearch(p)}
               >
-                Agregar
+                ➕ Agregar
               </button>
             </div>
           ))}
