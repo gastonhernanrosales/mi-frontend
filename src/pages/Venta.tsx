@@ -154,22 +154,25 @@ export default function Venta({ user, logout }: Props)
       </div>
       {/* 🔥 NUEVO — Resultados del buscador */}
       {search.length > 0 && (
-        <div className="venta-search-results">
-          {productosFiltrados.slice(0, 10).map((p) => (
-            <div key={p.id} className="venta-search-item">
-              <span>
-                {p.nombre} — ${p.precio} ({p.categoriaNombre})
-              </span>
+        <div className="venta-search-results"> 
+        {productosFiltrados.slice(0, 10).map((p) => ( 
+          
+          <div key={p.id} className="venta-search-item">
+            <div className="search-info">
+              <span>{p.nombre} — ${p.precio} ({p.categoriaNombre})</span>
               <small className="search-desc">{p.descripcion}</small>
-              <button
-                className="btn-add-search"
-                onClick={() => addProductFromSearch(p)}
-              >
-                ➕ Agregar
-              </button>
             </div>
-          ))}
-        </div>
+
+            <button
+            className="btn-add-search"
+            onClick={() => addProductFromSearch(p)}
+            >
+              ➕ Agregar
+            </button>
+            </div>
+            ))} 
+
+          </div>
       )}
 
       {loading && <p>Cargando productos...</p>}

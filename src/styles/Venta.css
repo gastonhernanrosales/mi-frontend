@@ -138,3 +138,32 @@
 .btn-add-search:hover {
   background: #218838;
 }
+.venta-search-results {
+  margin-top: 10px;
+  background: #0f4a42;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.venta-search-item {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 10px 5px;
+  border-bottom: 1px solid #2f6f66;
+}
+
+.venta-search-item:last-child {
+  border-bottom: none;
+}
+
+.search-desc {
+  display: block;
+  font-size: 12px;
+  opacity: 0.7;
+  margin-top: 3px;
+}
+.search-info {
+  display: flex;
+  flex-direction: column;
+}
