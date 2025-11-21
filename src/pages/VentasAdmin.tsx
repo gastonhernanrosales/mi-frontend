@@ -33,7 +33,7 @@ export default function VentasAdmin() {
   const [selectedVenta, setSelectedVenta] = useState<Venta | null>(null);
   const [filtroCajero, setFiltroCajero] = useState('');
   const [fiiltroFecha, setFiltroFecha] = useState('');
-  const filtroFecha=new Date(fiiltroFecha).toLocaleString('es-AR');
+  
   useEffect(() => {
     fetch(`${API_URL}/api/ventas`, {
       headers: { 'Content-Type': 'application/json' },
@@ -59,13 +59,13 @@ export default function VentasAdmin() {
         v.usuario.nombre.toLowerCase().includes(filtroCajero.toLowerCase())
       );
     }
-    if (filtroFecha.trim() !== '') {
+    if (fiiltroFecha.trim() !== '') {
       filtered = filtered.filter(v =>
-        new Date(v.fecha).toLocaleDateString() === new Date(filtroFecha).toLocaleDateString()
-      );
+      new Date(v.fecha).toISOString().slice(0, 10) === fiiltroFecha
+    );
     }
     setFilteredVentas(filtered);
-  }, [filtroCajero, filtroFecha, ventas]);
+  }, [filtroCajero, fiiltroFecha, ventas]);
 
   if (loading) return <div className="loading">Cargando ventas...</div>;
   if (error) return <div className="error-msg">{error}</div>;
@@ -106,7 +106,7 @@ export default function VentasAdmin() {
         />
         <input
           type="date"
-          value={filtroFecha}
+          value={fiiltroFecha}
           onChange={e => setFiltroFecha(e.target.value)}
           style={{ padding: '0.5rem', borderRadius: '0.5rem', border: 'none' }}
         />
