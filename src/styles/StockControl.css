@@ -1,8 +1,14 @@
-/* HEADER */
+/* === HEADER === */
 .stock-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 25px;
+}
+
+.stock-header h1 {
+  font-size: 26px;
+  font-weight: 700;
 }
 
 .print-btn {
@@ -10,71 +16,93 @@
   background: #007bff;
   border: none;
   color: #fff;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 15px;
+  font-weight: 600;
 }
+
 .print-btn:hover {
   background: #005ec4;
 }
 
-/* TABLERO DE ESTADÍSTICAS */
+/* === DASHBOARD DE ESTADÍSTICAS === */
 .stock-dashboard {
   margin: 20px 0;
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .stat-card {
   flex: 1;
+  min-width: 180px;
   background: #f5f5f5;
-  padding: 18px;
-  border-radius: 10px;
+  padding: 20px;
+  border-radius: 12px;
   text-align: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
+
 .stat-card h3 {
   margin: 0;
-  font-size: 18px;
+  font-size: 17px;
+  font-weight: 600;
 }
+
 .stat-card span {
-  font-size: 28px;
-  font-weight: bold;
-  margin-top: 5px;
+  font-size: 30px;
+  font-weight: 800;
+  margin-top: 8px;
   display: block;
 }
 
 .stat-card.warning {
   background: #fff3cd;
 }
+
 .stat-card.danger {
   background: #f8d7da;
 }
 
-/* BUSCADOR */
-.stock-search input {
-  width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  margin-bottom: 20px;
-  font-size: 16px;
+/* === BUSCADOR === */
+.stock-search {
+  margin: 20px 0;
 }
 
-/* TABLA */
+.stock-search input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  transition: 0.2s ease;
+}
+
+.stock-search input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 4px rgba(0,123,255,0.4);
+}
+
+/* === TABLA === */
 .table-stock {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 15px;
 }
 
 .table-stock th,
 .table-stock td {
-  padding: 12px;
+  padding: 12px 10px;
   border-bottom: 1px solid #ddd;
 }
 
 .table-stock th {
   background: #eaeaea;
   text-align: left;
+  font-weight: 600;
 }
 
 .warning-row {
@@ -86,17 +114,28 @@
   font-weight: bold;
 }
 
-/* MODO IMPRESIÓN */
+/* Hover fila */
+.table-stock tbody tr:hover {
+  background: #f1f1f1;
+}
+
+/* === IMPRESIÓN === */
 @media print {
-  .print-btn,
+
   header,
   nav,
   .sidebar,
-  .stat-card {
+  .print-btn,
+  .stat-card,
+  .stock-search {
     display: none !important;
   }
 
-  table {
-    font-size: 14px;
+  .table-stock {
+    font-size: 13px;
+  }
+
+  .table-stock th {
+    background: #ddd !important;
   }
 }
