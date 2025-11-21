@@ -1,37 +1,102 @@
-.stock-control-page {
-  padding: 20px;
-}
-
-.stock-filtros {
-  margin-bottom: 20px;
+/* HEADER */
+.stock-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 15px;
 }
 
-.stock-tabla {
+.print-btn {
+  padding: 8px 15px;
+  background: #007bff;
+  border: none;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.print-btn:hover {
+  background: #005ec4;
+}
+
+/* TABLERO DE ESTADÍSTICAS */
+.stock-dashboard {
+  margin: 20px 0;
+  display: flex;
+  gap: 20px;
+}
+
+.stat-card {
+  flex: 1;
+  background: #f5f5f5;
+  padding: 18px;
+  border-radius: 10px;
+  text-align: center;
+}
+.stat-card h3 {
+  margin: 0;
+  font-size: 18px;
+}
+.stat-card span {
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 5px;
+  display: block;
+}
+
+.stat-card.warning {
+  background: #fff3cd;
+}
+.stat-card.danger {
+  background: #f8d7da;
+}
+
+/* BUSCADOR */
+.stock-search input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+/* TABLA */
+.table-stock {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
 }
 
-.stock-tabla th,
-.stock-tabla td {
-  padding: 10px;
+.table-stock th,
+.table-stock td {
+  padding: 12px;
   border-bottom: 1px solid #ddd;
 }
 
-.stock-alerta {
-  background: rgba(255, 0, 0, 0.15);
+.table-stock th {
+  background: #eaeaea;
+  text-align: left;
+}
+
+.warning-row {
+  background: #fff8e1;
+}
+
+.danger-row {
+  background: #fde2e2;
   font-weight: bold;
 }
 
-.diff-negativa {
-  color: red;
-  font-weight: bold;
-}
+/* MODO IMPRESIÓN */
+@media print {
+  .print-btn,
+  header,
+  nav,
+  .sidebar,
+  .stat-card {
+    display: none !important;
+  }
 
-.diff-ok {
-  color: green;
-  font-weight: bold;
+  table {
+    font-size: 14px;
+  }
 }

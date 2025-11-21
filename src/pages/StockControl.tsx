@@ -1,123 +1,115 @@
 import { useEffect, useState } from "react";
+import Layout from "../components/Layout";
+import { User } from "../type";
 import { API_URL } from "../config";
-import { Product } from "./Products";
-import "../styles/stockControl.css";
 
-interface VentaDetalle {
+interface Product {
   id: number;
-  cantidad: number;
-  precioUnitario: number;
-  producto: Product;
-  venta: {
-    id: number;
-    fecha: string;
-    estado: string;
-  };
+  nombre: string;
+  categoria: string;
+  stock: number;
 }
 
-export default function StockControl() {
-  const [productos, setProductos] = useState<Product[]>([]);
-  const [detalles, setDetalles] = useState<VentaDetalle[]>([]);
-  const [fecha, setFecha] = useState<string>(new Date().toISOString().slice(0, 10));
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+interface StockControlProps {
+  user: User;
+  logout: () => void;
+}
 
-  // Cargar productos
-  const fetchProductos = async () => {
-    try {
-      const res = await fetch(`${API_URL}/api/Producto`);
-      if (!res.ok) throw new Error("Error al cargar productos");
-      setProductos(await res.json());
-    } catch {
-      setError("No se pudieron cargar los productos");
-    }
-  };
+export default function StockControl({ user, logout }: StockControlProps) {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [search, setSearch] = useState("");
 
-  // Cargar venta detalles
-  const fetchDetalles = async () => {
-    try {
-      const res = await fetch(`${API_URL}/api/VentaDetalles`);
-      if (!res.ok) throw new Error();
-      setDetalles(await res.json());
-    } catch {
-      setError("No se pudieron cargar las ventas");
-    }
-  };
+  const LOW_STOCK_LIMIT = 5;
 
   useEffect(() => {
-    const load = async () => {
-      setLoading(true);
-      await fetchProductos();
-      await fetchDetalles();
-      setLoading(false);
-    };
-    load();
+    async function fetchProducts() {
+      try {
+        const res = await fetch(`${API_URL}/products`);
+        const data = await res.json();
+        setProducts(data);
+      } catch (err) {
+        console.error("Error cargando productos", err);
+      }
+    }
+
+    fetchProducts();
   }, []);
 
-  if (loading) return <p>Cargando...</p>;
-  if (error) return <p style={{ color: "red" }}>{error}</p>;
+  const filtered = products.filter((p) =>
+    p.nombre.toLowerCase().includes(search.toLowerCase())
+  );
 
-  // 🧠 Filtrar ventas por fecha elegida
-  const detallesDelDia = detalles.filter((det) => {
-    const fechaVenta = new Date(det.venta.fecha).toISOString().slice(0, 10);
-    return fechaVenta === fecha && det.venta.estado !== "cancelada";
-  });
+  // 🔢 ESTADÍSTICAS
+  const totalProductos = products.length;
+  const sinStock = products.filter((p) => p.stock <= 0).length;
+  const bajoStock = products.filter((p) => p.stock > 0 && p.stock <= LOW_STOCK_LIMIT).length;
 
-  // 🧮 Calcular lo vendido por producto
-  const vendidosMap = new Map<number, number>();
-
-  detallesDelDia.forEach((d) => {
-    const actual = vendidosMap.get(d.producto.id) || 0;
-    vendidosMap.set(d.producto.id, actual + d.cantidad);
-  });
+  const imprimir = () => window.print();
 
   return (
-    <div className="stock-control-page">
-      <h2>📦 Control de Stock</h2>
+    <Layout user={user} role="admin" logout={logout}>
+      <div className="stock-header">
+        <h1>📦 Control de Stock</h1>
+        <button onClick={imprimir} className="print-btn">🖨️ Imprimir</button>
+      </div>
 
-      {/* fecha */}
-      <div className="stock-filtros">
-        <label>Fecha:</label>
+      {/* 🔵 TABLERO DE ESTADÍSTICAS */}
+      <div className="stock-dashboard">
+        <div className="stat-card">
+          <h3>Total productos</h3>
+          <span>{totalProductos}</span>
+        </div>
+
+        <div className="stat-card warning">
+          <h3>Stock bajo (≤ {LOW_STOCK_LIMIT})</h3>
+          <span>{bajoStock}</span>
+        </div>
+
+        <div className="stat-card danger">
+          <h3>Sin stock</h3>
+          <span>{sinStock}</span>
+        </div>
+      </div>
+
+      {/* 🔍 BUSCADOR */}
+      <div className="stock-search">
         <input
-          type="date"
-          value={fecha}
-          onChange={(e) => setFecha(e.target.value)}
+          type="text"
+          placeholder="Buscar producto..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </div>
 
-      <table className="stock-tabla">
+      {/* 📋 TABLA */}
+      <table className="table-stock">
         <thead>
           <tr>
             <th>Producto</th>
+            <th>Categoría</th>
             <th>Stock Actual</th>
-            <th>Vendido</th>
-            <th>Stock Antes del Día</th>
-            <th>Diferencia</th>
           </tr>
         </thead>
 
         <tbody>
-          {productos.map((p) => {
-            const vendidos = vendidosMap.get(p.id) || 0;
-
-            const stockActual = p.stock;
-            const stockEsperado = p.stock + vendidos;
-            const diferencia = stockActual - stockEsperado;
-
-            return (
-              <tr key={p.id} className={diferencia !== 0 ? "stock-alerta" : ""}>
-                <td>{p.nombre}</td>
-                <td>{stockActual}</td>
-                <td>{vendidos}</td>
-                <td>{stockEsperado}</td>
-                <td className={diferencia < 0 ? "diff-negativa" : "diff-ok"}>
-                  {diferencia}
-                </td>
-              </tr>
-            );
-          })}
+          {filtered.map((prod) => (
+            <tr
+              key={prod.id}
+              className={
+                prod.stock <= 0
+                  ? "danger-row"
+                  : prod.stock <= LOW_STOCK_LIMIT
+                  ? "warning-row"
+                  : ""
+              }
+            >
+              <td>{prod.nombre}</td>
+              <td>{prod.categoria}</td>
+              <td>{prod.stock}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
-    </div>
+    </Layout>
   );
 }

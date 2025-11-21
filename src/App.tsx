@@ -14,6 +14,7 @@ import PrivateRoute from './PrivateRoute';
 import ManageProducts from './pages/ManageProducts';
 import Users from './pages/Users';
 import VentasAdmin from './pages/VentasAdmin';
+import StockControl from './pages/StockControl';
 export default function App() {
   
   
@@ -55,6 +56,9 @@ function AppRoutes({ user, setUser }: { user: User | null; setUser: (u: User | n
           <Route path="manage-products" element={<ManageProducts userRole="admin" />} />
           <Route path="users" element={<Users />} />
           <Route path="ventasadmin" element={<VentasAdmin />} />
+          <Route path="/admin/stock-control" element={<StockControl user={user!} logout={logout} />}
+/>
+          
         </Route>
       </Route>
 
