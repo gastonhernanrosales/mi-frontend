@@ -51,6 +51,9 @@ export default function AdminDashboard({ user, logout }: Props) {
               <div className="card" onClick={() => navigate('/admin/manage-products')}>
                 🏷️ Gestionar Categorías o Proveedores
               </div>
+              <div className="card" onClick={() => navigate('/admin/stock-control')}>
+                 📦 Control de Stock
+              </div>
               <div className="card">📝 Reportes / Informes</div>
               <div className="card">⚙️ Configuración del sistema</div>
             </div>

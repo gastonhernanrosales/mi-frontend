@@ -1,0 +1,37 @@
+.stock-control-page {
+  padding: 20px;
+}
+
+.stock-filtros {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.stock-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.stock-tabla th,
+.stock-tabla td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.stock-alerta {
+  background: rgba(255, 0, 0, 0.15);
+  font-weight: bold;
+}
+
+.diff-negativa {
+  color: red;
+  font-weight: bold;
+}
+
+.diff-ok {
+  color: green;
+  font-weight: bold;
+}
