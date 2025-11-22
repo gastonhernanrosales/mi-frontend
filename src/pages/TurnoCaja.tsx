@@ -1,20 +1,25 @@
 import { useEffect, useState } from "react";
 import { API_URL } from "../config";
-import Modal from "../components/Modal";
+
 import "../styles/TurnoCaja.css";
+
+type Venta = {
+  id: number;
+  total: number;
+  metodoPago: string;
+  fecha: string;
+  usuarioId: number;
+};
 
 export default function TurnoCaja({ user }: any) {
   const [turno, setTurno] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   const [fondoInicial, setFondoInicial] = useState("");
-  const [efectivoFinal, setEfectivoFinal] = useState("");
-
-  const [openModal, setOpenModal] = useState(false);
-  const [resumen, setResumen] = useState<any>(null);
+  
 
   useEffect(() => {
-    fetch(`${API_URL}/api/turnos/abierto`)
+    fetch(`${API_URL}/api/turnos/abierto/${user.id}`)
       .then((res) => res.json())
       .then((data) => {
         setTurno(data);
@@ -23,7 +28,7 @@ export default function TurnoCaja({ user }: any) {
   }, []);
 
   const abrirTurno = async () => {
-    if (!fondoInicial) return alert("Coloca el fondo inicial");
+    if (!fondoInicial) return alert("Colocá el fondo inicial");
 
     const res = await fetch(`${API_URL}/api/turnos/abrir`, {
       method: "POST",
@@ -43,37 +48,45 @@ export default function TurnoCaja({ user }: any) {
     }
   };
 
-  const prepararCierre = async () => {
-    if (!efectivoFinal)
-      return alert("Coloca el efectivo contado al final");
-
-    const res = await fetch(`${API_URL}/api/turnos/${turno.id}/ventas`);
-    const data = await res.json();
-
-    const totalVentas = data.totalVentas;
-
-    const esperado = turno.fondoInicial + totalVentas;
-    const contado = parseFloat(efectivoFinal);
-    const diferencia = contado - esperado;
-
-    setResumen({ totalVentas, esperado, contado, diferencia });
-    setOpenModal(true);
-  };
-
   const cerrarTurno = async () => {
-    const res = await fetch(`${API_URL}/api/turnos/cerrar/${turno.id}`, {
-      method: "PUT",
+    const userId = localStorage.getItem("userId");
+
+    // 1️⃣ Obtener turno abierto
+    const turnoRes = await fetch(`${API_URL}/api/turnos/abierto/${userId}`);
+    const turno = await turnoRes.json();
+
+    if (!turno) {
+      alert("No tenés turno abierto");
+      return;
+    }
+
+    // 2️⃣ Traer ventas en el rango
+    const ventasRes = await fetch(
+      `${API_URL}/api/ventas/GetByUserAndTurno?userId=${userId}&desde=${turno.inicio}&hasta=${new Date().toISOString()}`
+    );
+
+    const ventas: Venta[] = await ventasRes.json();
+
+    // 3️⃣ Total efectivo
+    const totalEfectivo = ventas
+      .filter((v) => v.metodoPago.toLowerCase() === "efectivo")
+      .reduce((s: number, v: Venta) => s + v.total, 0);
+
+    const efectivoFinal = prompt(
+      `Total en efectivo calculado por el sistema: $${totalEfectivo}\n\nIngresá el efectivo contado:`
+    );
+
+    if (!efectivoFinal) return;
+
+    // 4️⃣ Enviar cierre
+    const cerrarRes = await fetch(`${API_URL}/api/turnos/cerrar/${turno.id}`, {
+      method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        efectivoFinal: parseFloat(efectivoFinal),
-      }),
+      body: JSON.stringify(parseFloat(efectivoFinal)),
     });
 
-    if (res.ok) {
-      setTurno(null);
-      setOpenModal(false);
-      alert("Turno cerrado correctamente");
-    }
+    const data = await cerrarRes.json();
+    alert(data.mensaje);
   };
 
   if (loading) return <div>Cargando turno...</div>;
@@ -109,41 +122,9 @@ export default function TurnoCaja({ user }: any) {
             <strong>Fondo Inicial:</strong> ${turno.fondoInicial}
           </p>
 
-          <label>Efectivo Contado:</label>
-          <input
-            type="number"
-            value={efectivoFinal}
-            onChange={(e) => setEfectivoFinal(e.target.value)}
-            placeholder="Ej: 38200"
-          />
-
-          <button onClick={prepararCierre}>Cerrar Turno</button>
+          <button onClick={cerrarTurno}>Cerrar Turno</button>
         </div>
       )}
-
-      <Modal open={openModal} onClose={() => setOpenModal(false)}>
-        <h2>🧾 Resumen del Turno</h2>
-
-        {resumen && (
-          <div className="modal-resumen">
-            <p><strong>Total Ventas:</strong> ${resumen.totalVentas}</p>
-            <p><strong>Efectivo Esperado:</strong> ${resumen.esperado}</p>
-            <p><strong>Efectivo Contado:</strong> ${resumen.contado}</p>
-            <p
-              style={{
-                fontWeight: "bold",
-                color: resumen.diferencia === 0 ? "green" : "red",
-              }}
-            >
-              Diferencia: ${resumen.diferencia}
-            </p>
-
-            <button className="confirm-btn" onClick={cerrarTurno}>
-              Confirmar Cierre
-            </button>
-          </div>
-        )}
-      </Modal>
     </div>
   );
 }
