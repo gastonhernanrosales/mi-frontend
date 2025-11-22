@@ -15,6 +15,8 @@ import ManageProducts from './pages/ManageProducts';
 import Users from './pages/Users';
 import VentasAdmin from './pages/VentasAdmin';
 import StockControl from './pages/StockControl';
+import TurnoCaja from './pages/TurnoCaja';
+import TurnosAdminPanel from './pages/TurnosAdminPanel';
 export default function App() {
   
   
@@ -56,7 +58,9 @@ function AppRoutes({ user, setUser }: { user: User | null; setUser: (u: User | n
           <Route path="manage-products" element={<ManageProducts userRole="admin" />} />
           <Route path="users" element={<Users />} />
           <Route path="ventasadmin" element={<VentasAdmin />} />
-          <Route path="/admin/stock-control" element={<StockControl user={user!} logout={logout} />}
+          <Route path="turnos" element={<TurnosAdminPanel />} />
+          <Route path="/admin/stock-control" element={<StockControl  />}
+          
 />
           
         </Route>
@@ -70,6 +74,7 @@ function AppRoutes({ user, setUser }: { user: User | null; setUser: (u: User | n
           <Route path="mis-ventas" element={<MisVentas />} />
           <Route path="productos" element={<Products />} />
           <Route path="pago" element={<Pago />} />
+          <Route path="turno" element={<TurnoCaja user={user!} />} />
           
         </Route>
       </Route>
