@@ -20,11 +20,17 @@ export default function TurnoCaja({ user }: any) {
 
   useEffect(() => {
     fetch(`${API_URL}/api/turnos/abierto/${user.id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setTurno(data);
+      .then(async (res) => {
+        const text = await res.text(); // leemos todo crudo
+
+        if (!text) {
+          setTurno(null);
+        } else {
+          setTurno(JSON.parse(text));
+        }
+
         setLoading(false);
-      });
+         });
   }, []);
 
   const abrirTurno = async () => {
@@ -53,7 +59,16 @@ export default function TurnoCaja({ user }: any) {
 
     // 1️⃣ Obtener turno abierto
     const turnoRes = await fetch(`${API_URL}/api/turnos/abierto/${userId}`);
-    const turno = await turnoRes.json();
+    const turnoText = await turnoRes.text();
+    let turno: any = null;
+
+    if (turnoText) {
+      try {
+        turno = JSON.parse(turnoText);
+      } catch {
+      turno = null;
+  }
+}
 
     if (!turno) {
       alert("No tenés turno abierto");
