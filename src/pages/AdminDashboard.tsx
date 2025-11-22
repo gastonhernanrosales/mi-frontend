@@ -45,6 +45,9 @@ export default function AdminDashboard({ user, logout }: Props) {
               <div className="card" onClick={() => navigate('/admin/users')}>
                 👤 Gestionar Usuarios
               </div>
+              <div className="card" onClick={() => navigate('/admin/turnos')}>
+               🧾 Turnos de Caja
+              </div>
               <div className="card" onClick={() => navigate('/admin/ventasadmin')}>
                 💰 Ver Ventas
               </div>

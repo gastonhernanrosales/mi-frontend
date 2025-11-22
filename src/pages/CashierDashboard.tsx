@@ -46,6 +46,10 @@ export default function CashierDashboard({ user, logout }: Props) {
             <div className="card" onClick={() => navigate("/cajero/venta")}>
               🛒 Nueva Venta
             </div>
+            <div className="card" onClick={() => navigate("/cajero/turno")}>
+             🧾 Turno de Caja
+            </div>
+            
             <div className="card" onClick={() => navigate("/cajero/mis-ventas")}>
               📋 Mis Ventas
             </div>
@@ -54,8 +58,9 @@ export default function CashierDashboard({ user, logout }: Props) {
             </div>
             <div className="card" onClick={() => navigate("/cajero/productos")}>
               📦 Consultar Productos
-            </div>
+            
           </div>
+        </div>
         )}
           <Outlet />
           
