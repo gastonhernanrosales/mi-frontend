@@ -36,6 +36,7 @@ const ManageProducts: React.FC<ProductsProps> = ({ userRole }) => {
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [search, setSearch] = useState("");
 
   const [form, setForm] = useState({
     nombre: "",
@@ -318,12 +319,23 @@ const ManageProducts: React.FC<ProductsProps> = ({ userRole }) => {
 
         {loading && <p>Cargando productos...</p>}
         {error && <p style={{ color: "red" }}>{error}</p>}
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Buscar producto por nombre..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
 
         <div className="products-grid">
           {products.length === 0 ? (
             <p>No hay productos disponibles</p>
           ) : (
-            products.map((product) => (
+            products
+            .filter((p) =>
+              p.nombre.toLowerCase().includes(search.toLowerCase())
+            )
+            .map((product) => (
               <div key={product.id} className="product-card">
                 {product.imageUrl && (
                   <img src={product.imageUrl} alt={product.nombre} className="product-image" />
