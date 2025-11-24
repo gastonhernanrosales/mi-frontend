@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { API_URL } from "../config";
 
 import "../styles/TurnoCaja.css";
-import { data } from "react-router-dom";
+
 
 type Venta = {
   id: number;
@@ -20,7 +20,7 @@ export default function TurnoCaja({ user }: any) {
   
 
   useEffect(() => {
-    console.log(user.id);
+    
     if (!user?.id) return; // <<< prevent null
     fetch(`${API_URL}/api/Turnos/abierto/${user.id}`)
       .then(async (res) => {
@@ -54,11 +54,11 @@ export default function TurnoCaja({ user }: any) {
 
     if (res.ok) {
       const data = await res.json();
-      console.log(data);
+      
       setTurno(data);
       alert("Turno iniciado correctamente");
     } else {
-      console.log(data);
+      
       alert("Ya existe un turno abierto",);
     }
   };
