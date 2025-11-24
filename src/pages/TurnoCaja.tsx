@@ -21,7 +21,7 @@ export default function TurnoCaja({ user }: any) {
   useEffect(() => {
     console.log(user.id);
     if (!user?.id) return; // <<< prevent null
-    fetch(`${API_URL}/api/turnos/abierto/${user.id}`)
+    fetch(`${API_URL}/api/Turnos/abierto/${user.id}`)
       .then(async (res) => {
         const text = await res.text(); // leemos todo crudo
 
@@ -42,7 +42,7 @@ export default function TurnoCaja({ user }: any) {
       return;
     }
 
-    const res = await fetch(`${API_URL}/api/turnos/abrir`, {
+    const res = await fetch(`${API_URL}/api/Turnos/abrir`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -64,7 +64,7 @@ export default function TurnoCaja({ user }: any) {
     const userId = localStorage.getItem("userId");
 
     // 1️⃣ Obtener turno abierto
-    const turnoRes = await fetch(`${API_URL}/api/turnos/abierto/${userId}`);
+    const turnoRes = await fetch(`${API_URL}/api/Turnos/abierto/${userId}`);
     const turnoText = await turnoRes.text();
     let turno: any = null;
 
@@ -100,7 +100,7 @@ export default function TurnoCaja({ user }: any) {
     if (!efectivoFinal) return;
 
     // 4️⃣ Enviar cierre
-    const cerrarRes = await fetch(`${API_URL}/api/turnos/cerrar/${turno.id}`, {
+    const cerrarRes = await fetch(`${API_URL}/api/Turnos/cerrar/${turno.id}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(parseFloat(efectivoFinal)),
