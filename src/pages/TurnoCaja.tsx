@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { API_URL } from "../config";
 
 import "../styles/TurnoCaja.css";
+import { data } from "react-router-dom";
 
 type Venta = {
   id: number;
@@ -57,7 +58,8 @@ export default function TurnoCaja({ user }: any) {
       setTurno(data);
       alert("Turno iniciado correctamente");
     } else {
-      alert("Ya existe un turno abierto");
+      console.log(data);
+      alert("Ya existe un turno abierto",);
     }
   };
 
