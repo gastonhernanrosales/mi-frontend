@@ -19,6 +19,8 @@ export default function TurnoCaja({ user }: any) {
   
 
   useEffect(() => {
+    console.log(user.id);
+    if (!user?.id) return; // <<< prevent null
     fetch(`${API_URL}/api/turnos/abierto/${user.id}`)
       .then(async (res) => {
         const text = await res.text(); // leemos todo crudo
@@ -35,6 +37,10 @@ export default function TurnoCaja({ user }: any) {
 
   const abrirTurno = async () => {
     if (!fondoInicial) return alert("Colocá el fondo inicial");
+    if (!user?.id) {
+      alert("Error: usuario no encontrado");
+      return;
+    }
 
     const res = await fetch(`${API_URL}/api/turnos/abrir`, {
       method: "POST",
