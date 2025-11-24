@@ -117,7 +117,8 @@ export default function TurnoCaja({ user }: any) {
 
     
     // Navegar al detalle del turno recién cerrado 🔥🔥🔥
-    navigate(`/Turnos/detalle/${turno.id}`);
+    ;
+    navigate(`/cajero/turnos/detalle/${turno.id}`);
   };
 
   if (loading) return <div>Cargando turno...</div>;

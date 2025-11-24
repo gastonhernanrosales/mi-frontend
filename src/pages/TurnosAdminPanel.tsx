@@ -50,7 +50,7 @@ export default function TurnosAdminPanel() {
               <td>
                 <button
                   className="btn-ver-detalle"
-                  onClick={() => navigate(`/turnos/detalle/${t.id}`)}
+                  onClick={() => navigate(`/admin/turnos/detalle/${t.id}`)}
                 >
                   Ver Detalle
                 </button>
