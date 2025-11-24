@@ -77,7 +77,7 @@ function AppRoutes({ user, setUser }: { user: User | null; setUser: (u: User | n
           <Route path="productos" element={<Products />} />
           <Route path="pago" element={<Pago />} />
           <Route path="turno" element={<TurnoCaja user={user!} />} />
-          <Route path="/turnos/detalle/:id" element={<TurnoDetalle />} />
+          <Route path="turnos/detalle/:id" element={<TurnoDetalle />} />
         </Route>
       </Route>
 
