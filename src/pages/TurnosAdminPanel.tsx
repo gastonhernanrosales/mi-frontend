@@ -5,15 +5,12 @@ export default function TurnosAdminPanel() {
   const [turnos, setTurnos] = useState([]);
 
   useEffect(() => {
-    fetch(`${API_URL}/api/turnos`)
+    fetch(`${API_URL}/api/Turnos`)
       .then(res => res.json())
       .then(data => setTurnos(data));
   }, []);
 
-  const calcularDiferencia = (t: any) => {
-    const esperado = t.fondoInicial + t.totalVentas;
-    return t.efectivoFinal - esperado;
-  };
+ 
 
   return (
     <div className="turnos-admin-container">
@@ -37,16 +34,12 @@ export default function TurnosAdminPanel() {
             <tr key={t.id}>
               <td>{t.usuario?.nombre ?? "—"}</td>
               <td>{new Date(t.inicio).toLocaleString()}</td>
-              <td>{t.fin ? new Date(t.fin).toLocaleString() : "—"}</td>
+              <td>{t.cierre ? new Date(t.cierre).toLocaleString() : "—"}</td>
               <td>${t.fondoInicial}</td>
-              <td>${t.totalVentas}</td>
+              <td>${t.totalEfectivo ?? 0}</td>
               <td>${t.efectivoFinal}</td>
-              <td
-                className={
-                calcularDiferencia(t) === 0 ? "diferencia-ok" : "diferencia-mala"
-                 }
-                  >
-                ${calcularDiferencia(t)}
+              <td className={t.diferencia === 0 ? "diferencia-ok" : "diferencia-mala"}>
+              ${t.diferencia}
               </td>
             </tr>
           ))}
