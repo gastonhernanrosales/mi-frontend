@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { API_URL } from "../config";
 import "../styles/TurnosAdminPanel.css";
+import { useNavigate } from "react-router-dom";
+
+
 export default function TurnosAdminPanel() {
   const [turnos, setTurnos] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`${API_URL}/api/Turnos`)
@@ -26,6 +30,7 @@ export default function TurnosAdminPanel() {
             <th>Total Ventas</th>
             <th>Efectivo Final</th>
             <th>Diferencia</th>
+            <th>Acciones</th> {/* NUEVO */}
           </tr>
         </thead>
 
@@ -40,6 +45,15 @@ export default function TurnosAdminPanel() {
               <td>${t.efectivoFinal}</td>
               <td className={t.diferencia === 0 ? "diferencia-ok" : "diferencia-mala"}>
               ${t.diferencia}
+              </td>
+              {/* BOTÓN VER DETALLE */}
+              <td>
+                <button
+                  className="btn-ver-detalle"
+                  onClick={() => navigate(`/turnos/detalle/${t.id}`)}
+                >
+                  Ver Detalle
+                </button>
               </td>
             </tr>
           ))}

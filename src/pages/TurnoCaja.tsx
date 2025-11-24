@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { API_URL } from "../config";
 
 import "../styles/TurnoCaja.css";
+import { useNavigate } from "react-router-dom";
 
 
 type Venta = {
@@ -15,7 +16,7 @@ type Venta = {
 export default function TurnoCaja({ user }: any) {
   const [turno, setTurno] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-
+  const navigate = useNavigate();
   const [fondoInicial, setFondoInicial] = useState("");
   
 
@@ -111,6 +112,12 @@ export default function TurnoCaja({ user }: any) {
 
     const data = await cerrarRes.json();
     alert(data.mensaje);
+    // 5️⃣ BORRAR EL TURNO DEL ESTADO (así desaparece la UI de cierre)
+    setTurno(null);
+
+    
+    // Navegar al detalle del turno recién cerrado 🔥🔥🔥
+    navigate(`/Turnos/detalle/${turno.id}`);
   };
 
   if (loading) return <div>Cargando turno...</div>;
