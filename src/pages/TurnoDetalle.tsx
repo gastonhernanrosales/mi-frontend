@@ -51,6 +51,20 @@ export default function TurnoDetalle() {
               <p><strong>Total:</strong> ${v.total}</p>
               <p><strong>Método:</strong> {v.metodoPago}</p>
               <p><strong>Fecha:</strong> {new Date(v.fecha).toLocaleString()}</p>
+              <h4 style={{ marginTop: "10px" }}>🛒 Detalle:</h4>
+
+              {v.items && v.items.length > 0 ? (
+              <ul className="items-lista">
+              {v.items.map((item: any, i: number) => (
+              <li key={i}>
+              {item.nombre} — {item.cantidad} u × ${item.precio} = 
+              <strong> ${item.subtotal}</strong>
+              </li>
+              ))}
+            </ul>
+      ) : (
+        <p className="sin-items">No hay detalle de productos.</p>
+      )}
             </div>
           ))}
         </div>
