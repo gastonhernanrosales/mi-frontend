@@ -53,6 +53,7 @@ export default function TurnoCaja({ user }: any) {
 
     if (res.ok) {
       const data = await res.json();
+      console.log(data);
       setTurno(data);
       alert("Turno iniciado correctamente");
     } else {
