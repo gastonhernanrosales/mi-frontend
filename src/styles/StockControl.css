@@ -1,7 +1,7 @@
 .stock-container {
-  max-width: 1200px;
+  max-width: 100%;
   margin: auto;
-  padding: 30px;
+  padding: 30px 40px;
 }
 
 /* HEADER */
@@ -44,8 +44,14 @@
 }
 
 .stat-card span {
-  font-size: 32px;
+  font-size: 38px;
   font-weight: 800;
+}
+.stock-dashboard {
+  margin-bottom: 35px;
+}
+.stock-search input {
+  max-width: 500px;
 }
 
 .stat-card.warning {
@@ -91,12 +97,13 @@
 .table-stock {
   width: 100%;
   border-collapse: collapse;
-  font-size: 16px;
+  font-size: 17px;
 }
 
 .table-stock th,
 .table-stock td {
-  padding: 14px 10px;
+  font-size: 16px;
+  padding: 16px 12px;
   border-bottom: 1px solid #ddd;
 }
 
