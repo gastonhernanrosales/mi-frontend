@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import "../styles/ManageProducts.css";
 import Modal from "../components/Modal";
 import { API_URL } from "../config";
+import { useLocation } from "react-router-dom";
 
 type Product = {
   id: number;
@@ -37,6 +38,8 @@ const ManageProducts: React.FC<ProductsProps> = ({ userRole }) => {
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [search, setSearch] = useState("");
+  const location = useLocation();
+  const productFromStock = location.state?.product as Product | undefined;
 
   const [form, setForm] = useState({
     nombre: "",
@@ -66,6 +69,11 @@ const ManageProducts: React.FC<ProductsProps> = ({ userRole }) => {
       console.error(err);
     }
   };
+  useEffect(() => {
+  if (productFromStock) {
+    handleEdit(productFromStock);
+  }
+}, [productFromStock]);
 
   useEffect(() => {
     fetchCategories();

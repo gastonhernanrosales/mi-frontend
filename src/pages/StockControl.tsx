@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { API_URL } from "../config";
 import '../styles/StockControl.css';
+import { useNavigate } from "react-router-dom";
 interface Product {
   id: number;
   nombre: string;
@@ -21,7 +22,7 @@ export default function StockControl() {
   const [sortField, setSortField] = useState<SortField>("nombre");
   const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
   const [stockFilter, setStockFilter] = useState<StockFilter>("all");
-
+  const navigate = useNavigate();
   const LOW_STOCK_LIMIT = 5;
 
   useEffect(() => {
@@ -81,9 +82,12 @@ export default function StockControl() {
 
   const imprimir = () => window.print();
 
-  const goToManageProducts = (id: number) => {
-    window.location.href = `/manageproducts/${id}`;
-  };
+ 
+  const goToManageProducts = (product: Product) => {
+  navigate("/manageproducts", {
+    state: { product }
+  });
+};
 
   return (
     <div className="stock-container">
@@ -183,7 +187,7 @@ export default function StockControl() {
               <td>
                 <button
                   className="edit-btn"
-                  onClick={() => goToManageProducts(prod.id)}
+                  onClick={() => goToManageProducts(prod)}
                 >
                   ✏️ Editar
                 </button>
