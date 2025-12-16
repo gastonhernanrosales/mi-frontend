@@ -84,7 +84,7 @@ export default function StockControl() {
 
  
   const goToManageProducts = (product: Product) => {
-  navigate("/manageproducts", {
+  navigate("/admin/manage-products", {
     state: { product }
   });
 };
