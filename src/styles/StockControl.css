@@ -1,7 +1,8 @@
 .stock-container {
-  max-width: 100%;
-  margin: auto;
-  padding: 30px 40px;
+  width: 100%;
+  padding: 40px 50px;
+  font-size: 18px; /* 🔥 CLAVE */
+  zoom: 1.05;
 }
 
 /* HEADER */
@@ -13,8 +14,8 @@
 }
 
 .stock-header h1 {
-  font-size: 28px;
-  font-weight: 800;
+  font-size: 34px;
+  font-weight: 900;
 }
 
 .print-btn {
@@ -38,21 +39,24 @@
 .stat-card {
   flex: 1;
   background: #f5f5f5;
-  padding: 20px;
+  padding: 28px;
   border-radius: 14px;
   text-align: center;
 }
 
 .stat-card span {
-  font-size: 38px;
-  font-weight: 800;
+  font-size: 34px;
+  font-weight: 900;
 }
 .stock-dashboard {
   margin-bottom: 35px;
 }
 .stock-search input {
-  max-width: 500px;
+  max-width: 600px;
+  font-size: 18px;
+  padding: 16px 18px;
 }
+
 
 .stat-card.warning {
   background: #fff3cd;
@@ -80,12 +84,10 @@
 }
 
 .stock-filters button {
-  padding: 8px 14px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
-  background: #f2f2f2;
-  cursor: pointer;
-  font-weight: 600;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 24px;
+  
 }
 
 .stock-filters button.active {
@@ -97,14 +99,18 @@
 .table-stock {
   width: 100%;
   border-collapse: collapse;
-  font-size: 17px;
+  font-size: 18px;
 }
 
-.table-stock th,
+.table-stock th {
+  font-size: 17px;
+  padding: 18px 14px;
+  background: #eaeaea;
+}
+
 .table-stock td {
-  font-size: 16px;
-  padding: 16px 12px;
-  border-bottom: 1px solid #ddd;
+  padding: 18px 14px;
+  vertical-align: middle;
 }
 
 .table-stock th {
@@ -121,10 +127,9 @@
 
 /* BADGES */
 .badge {
-  padding: 6px 12px;
-  border-radius: 14px;
-  font-size: 13px;
-  font-weight: 700;
+  padding: 8px 16px;
+  font-size: 15px;
+  border-radius: 18px;
 }
 
 .badge.success {
@@ -144,12 +149,9 @@
 
 /* EDIT BUTTON */
 .edit-btn {
-  padding: 6px 10px;
-  border-radius: 8px;
-  border: none;
-  background: #6c757d;
-  color: white;
-  cursor: pointer;
+  padding: 10px 14px;
+  font-size: 15px;
+  border-radius: 10px;
 }
 
 .edit-btn:hover {
