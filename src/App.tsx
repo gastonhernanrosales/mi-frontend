@@ -61,7 +61,7 @@ function AppRoutes({ user, setUser }: { user: User | null; setUser: (u: User | n
           <Route path="ventasadmin" element={<VentasAdmin />} />
           <Route path="turnos" element={<TurnosAdminPanel />} />
           <Route path="turnos/detalle/:id" element={<TurnoDetalle />} />
-          <Route path="/admin/stock-control" element={<StockControl  />}
+          <Route path="stock-control" element={<StockControl  />}
           
 />
           
