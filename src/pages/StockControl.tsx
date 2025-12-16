@@ -1,21 +1,26 @@
 import { useEffect, useState } from "react";
-
 import { API_URL } from "../config";
 
 interface Product {
   id: number;
   nombre: string;
-  categoria: {
+  categoria?: {
     id: number;
     nombre: string;
   };
   stock: number;
 }
 
+type SortField = "nombre" | "stock";
+type SortOrder = "asc" | "desc";
+type StockFilter = "all" | "low" | "out";
 
 export default function StockControl() {
   const [products, setProducts] = useState<Product[]>([]);
   const [search, setSearch] = useState("");
+  const [sortField, setSortField] = useState<SortField>("nombre");
+  const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
+  const [stockFilter, setStockFilter] = useState<StockFilter>("all");
 
   const LOW_STOCK_LIMIT = 5;
 
@@ -29,15 +34,45 @@ export default function StockControl() {
         console.error("Error cargando productos", err);
       }
     }
-
     fetchProducts();
   }, []);
 
-  const filtered = products.filter((p) =>
-    p.nombre.toLowerCase().includes(search.toLowerCase())
-  );
+  /* FILTROS */
+  const filtered = products
+    .filter((p) =>
+      p.nombre.toLowerCase().includes(search.toLowerCase())
+    )
+    .filter((p) => {
+      if (stockFilter === "low") return p.stock > 0 && p.stock <= LOW_STOCK_LIMIT;
+      if (stockFilter === "out") return p.stock <= 0;
+      return true;
+    });
 
-  // Stats
+  /* ORDEN */
+  const sortedProducts = [...filtered].sort((a, b) => {
+    let result = 0;
+
+    if (sortField === "nombre") {
+      result = a.nombre.localeCompare(b.nombre);
+    }
+
+    if (sortField === "stock") {
+      result = a.stock - b.stock;
+    }
+
+    return sortOrder === "asc" ? result : -result;
+  });
+
+  const handleSort = (field: SortField) => {
+    if (sortField === field) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortField(field);
+      setSortOrder("asc");
+    }
+  };
+
+  /* STATS */
   const totalProductos = products.length;
   const sinStock = products.filter((p) => p.stock <= 0).length;
   const bajoStock = products.filter(
@@ -45,6 +80,10 @@ export default function StockControl() {
   ).length;
 
   const imprimir = () => window.print();
+
+  const goToManageProducts = (id: number) => {
+    window.location.href = `/manageproducts/${id}`;
+  };
 
   return (
     <div className="stock-container">
@@ -84,31 +123,71 @@ export default function StockControl() {
         />
       </div>
 
+      {/* FILTERS */}
+      <div className="stock-filters">
+        <button
+          className={stockFilter === "all" ? "active" : ""}
+          onClick={() => setStockFilter("all")}
+        >
+          Todos
+        </button>
+
+        <button
+          className={stockFilter === "low" ? "active" : ""}
+          onClick={() => setStockFilter("low")}
+        >
+          Bajo stock
+        </button>
+
+        <button
+          className={stockFilter === "out" ? "active" : ""}
+          onClick={() => setStockFilter("out")}
+        >
+          Sin stock
+        </button>
+      </div>
+
       {/* TABLE */}
       <table className="table-stock">
         <thead>
           <tr>
-            <th>Producto</th>
+            <th onClick={() => handleSort("nombre")} className="sortable">
+              Producto {sortField === "nombre" && (sortOrder === "asc" ? "⬆️" : "⬇️")}
+            </th>
             <th>Categoría</th>
-            <th>Stock Actual</th>
+            <th onClick={() => handleSort("stock")} className="sortable">
+              Stock {sortField === "stock" && (sortOrder === "asc" ? "⬆️" : "⬇️")}
+            </th>
+            <th>Estado</th>
+            <th>Acciones</th>
           </tr>
         </thead>
 
         <tbody>
-          {filtered.map((prod) => (
-            <tr
-              key={prod.id}
-              className={
-                prod.stock <= 0
-                  ? "danger-row"
-                  : prod.stock <= LOW_STOCK_LIMIT
-                  ? "warning-row"
-                  : ""
-              }
-            >
+          {sortedProducts.map((prod) => (
+            <tr key={prod.id}>
               <td>{prod.nombre}</td>
               <td>{prod.categoria?.nombre ?? "Sin categoría"}</td>
               <td>{prod.stock}</td>
+
+              <td>
+                {prod.stock <= 0 && <span className="badge danger">Sin stock</span>}
+                {prod.stock > 0 && prod.stock <= LOW_STOCK_LIMIT && (
+                  <span className="badge warning">Bajo</span>
+                )}
+                {prod.stock > LOW_STOCK_LIMIT && (
+                  <span className="badge success">OK</span>
+                )}
+              </td>
+
+              <td>
+                <button
+                  className="edit-btn"
+                  onClick={() => goToManageProducts(prod.id)}
+                >
+                  ✏️ Editar
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
