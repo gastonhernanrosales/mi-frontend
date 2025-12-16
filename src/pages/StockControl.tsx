@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { API_URL } from "../config";
-
+import '../styles/StockControl.css';
 interface Product {
   id: number;
   nombre: string;
