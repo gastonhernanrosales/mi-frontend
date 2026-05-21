@@ -17,6 +17,47 @@ export default function AsistenteIA() {
   ]);
 
   const [escribiendo, setEscribiendo] = useState(false);
+  const iniciarReconocimientoVoz = () => {
+  const SpeechRecognition =
+    (window as any).SpeechRecognition ||
+    (window as any).webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    alert("Tu navegador no soporta reconocimiento de voz.");
+    return;
+  }
+
+  const recognition = new SpeechRecognition();
+
+  recognition.lang = "es-ES";
+
+  recognition.start();
+
+  recognition.onstart = () => {
+    console.log("🎤 Escuchando...");
+  };
+
+  recognition.onresult = (event: any) => {
+    const texto = event.results[0][0].transcript;
+
+    setMensaje(texto);
+  };
+
+  recognition.onerror = () => {
+    alert("Error usando micrófono");
+  };
+};
+  const hablarTexto = (texto: string) => {
+  const speech = new SpeechSynthesisUtterance(texto);
+
+  speech.lang = "es-ES";
+
+  speech.rate = 1;
+
+  speech.pitch = 1;
+
+  window.speechSynthesis.speak(speech);
+};
 
   const enviarMensaje = async () => {
     if (!mensaje.trim()) return;
@@ -64,6 +105,7 @@ export default function AsistenteIA() {
         };
 
         setMensajes((prev) => [...prev, respuestaIA]);
+        hablarTexto(respuesta);
 
         setEscribiendo(false);
       }, 1500);
@@ -119,6 +161,12 @@ export default function AsistenteIA() {
         >
           ➤
         </button>
+        <button
+  onClick={iniciarReconocimientoVoz}
+  className="ia-mic"
+>
+  🎤
+</button>
 
       </div>
 

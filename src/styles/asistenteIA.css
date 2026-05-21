@@ -76,3 +76,17 @@
   font-size: 20px;
   cursor: pointer;
 }
+.ia-mic {
+  width: 55px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 50%;
+  background: #ff1744;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
