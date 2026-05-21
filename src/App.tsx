@@ -79,7 +79,7 @@ function AppRoutes({ user, setUser }: { user: User | null; setUser: (u: User | n
           <Route path="pago" element={<Pago />} />
           <Route path="turno" element={<TurnoCaja user={user!} />} />
           <Route path="turnos/detalle/:id" element={<TurnoDetalle />} />
-          <Route path="/AsistenteIA" element={<AsistenteIA />} />
+          <Route path="asistente-ia" element={<AsistenteIA />} />
         </Route>
       </Route>
 
