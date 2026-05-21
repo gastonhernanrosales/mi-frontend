@@ -63,6 +63,13 @@ export default function CashierDashboard({ user, logout }: Props) {
         </div>
         )}
           <Outlet />
+          <button
+  className="ia-button"
+  onClick={() => navigate("/cajero/asistente-ia")}
+>
+  ✨
+  <span className="ia-badge">1</span>
+</button>
           
 
           

@@ -215,3 +215,71 @@
   .hamburger {
     display: none!important;
   }}
+
+  /* === ia === */
+
+  .ia-button {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #7b2ff7, #00c6ff);
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.3s ease;
+
+  z-index: 999;
+  animation: pulseIA 2s infinite;
+}
+
+.ia-button:hover {
+  transform: scale(1.1);
+}
+
+@keyframes pulseIA {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(123,47,247,0.7);
+  }
+
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 18px rgba(123,47,247,0);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(123,47,247,0);
+  }
+}
+
+.ia-badge {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+
+  background: red;
+  color: white;
+
+  width: 22px;
+  height: 22px;
+
+  border-radius: 50%;
+
+  font-size: 12px;
+  font-weight: bold;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

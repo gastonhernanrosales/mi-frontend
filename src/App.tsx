@@ -18,6 +18,7 @@ import StockControl from './pages/StockControl';
 import TurnoCaja from './pages/TurnoCaja';
 import TurnosAdminPanel from './pages/TurnosAdminPanel';
 import TurnoDetalle from './pages/TurnoDetalle';
+import AsistenteIA from './pages/asistenteIA';
 export default function App() {
   
   
@@ -78,6 +79,7 @@ function AppRoutes({ user, setUser }: { user: User | null; setUser: (u: User | n
           <Route path="pago" element={<Pago />} />
           <Route path="turno" element={<TurnoCaja user={user!} />} />
           <Route path="turnos/detalle/:id" element={<TurnoDetalle />} />
+          <Route path="/AsistenteIA" element={<AsistenteIA />} />
         </Route>
       </Route>
 
