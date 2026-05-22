@@ -80,92 +80,114 @@ export default function Login({ setUser }: LoginProps) {
 
   return (
     <>
-    {showIntro ? (
 
-      <div className="startup-intro">
+      {showIntro ? (
 
-        <video
-          autoPlay
-          className="startup-video"
-        >
-          <source src="/startup.mp4" type="video/mp4" />
-        </video>
+        <div className="startup-intro">
 
-        <div className="startup-overlay">
-          <h1>TW STORE AI</h1>
-          <p>Inicializando sistema inteligente...</p>
+          <video
+            autoPlay
+            className="startup-video"
+          >
+            <source src="/startup.mp4" type="video/mp4" />
+          </video>
+
+          <div className="startup-overlay">
+            <h1>TW STORE AI</h1>
+            <p>Inicializando sistema inteligente...</p>
+          </div>
+
         </div>
 
-      </div>
+      ) : (
 
-    ):(
-    <div className="login-page">
-      <video
-    autoPlay
-    loop
-    
-    playsInline
-    className="login-video"
-  >
-    <source src="/intro.mp4" type="video/mp4" />
-  </video>
-  
+        <div className="login-page">
 
-    
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="login-video"
+          >
+            <source src="/intro.mp4" type="video/mp4" />
+          </video>
 
-      <div className="login-card">
-        <h2>Iniciar Sesión</h2>
-        <form onSubmit={handleSubmit}>
-          {/* Email */}
-          <div className="input-group">
-            <Mail className="icon" />
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+          <div className="login-card">
+
+            <h2>Iniciar Sesión</h2>
+
+            <form onSubmit={handleSubmit}>
+
+              {/* Email */}
+              <div className="input-group">
+
+                <Mail className="icon" />
+
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+
+              </div>
+
+              {/* Password */}
+              <div className="input-group">
+
+                <Lock className="icon" />
+
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="Contraseña"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+
+                <span
+                  className="show-password"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? "🙈" : "👁️"}
+                </span>
+
+              </div>
+
+              {/* Rol */}
+              <div className="input-group">
+
+                <User className="icon" />
+
+                <select
+                  value={role}
+                  onChange={(e) =>
+                    setRole(e.target.value as 'admin' | 'cajero')
+                  }
+                >
+                  <option value="admin">Administrador</option>
+                  <option value="cajero">Cajero</option>
+                </select>
+
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+              >
+                {loading ? "Cargando..." : "Entrar"}
+              </button>
+
+            </form>
+
           </div>
 
-          {/* Password */}
-          <div className="input-group">
-            <Lock className="icon" />
-            <input
-              type={showPassword ? 'text' : 'password'}
-              placeholder="Contraseña"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            
-            <span
-              className="show-password"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? "🙈" : "👁️"}
-            </span>
-          </div>
+        </div>
 
-          {/* Selector de rol visual (opcional, no lo usa el backend aún) */}
-          <div className="input-group">
-            <User className="icon" />
-            <select
-              value={role}
-              onChange={(e) => setRole(e.target.value as 'admin' | 'cajero')}
-            >
-              <option value="admin">Administrador</option>
-              <option value="cajero">Cajero</option>
-            </select>
-          </div>
+      )}
 
-          <button type="submit" disabled={loading}>
-            {loading ? "Cargando..." : "Entrar"}
-          </button>
-        </form>
-      </div>
-    </div>
-    )}
- </>
+    </>
   );
 }
