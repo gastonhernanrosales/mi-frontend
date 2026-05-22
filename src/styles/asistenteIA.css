@@ -1,8 +1,12 @@
 .ia-container {
-  height: 100vh;
-  background: #0f172a;
   display: flex;
   flex-direction: column;
+
+  height: 100vh;
+
+  padding: 20px;
+
+  overflow: hidden;
 }
 
 .ia-header {
@@ -17,13 +21,22 @@
 
 .ia-chat {
   flex: 1;
-  padding: 20px;
+
   overflow-y: auto;
 
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  margin-top: 20px;
+
+  padding: 20px;
+
+  border-radius: 20px;
+
+  background: rgba(255,255,255,0.04);
+
+  backdrop-filter: blur(10px);
+
+  min-height: 250px;
 }
+
 
 .mensaje {
   max-width: 70%;
@@ -50,9 +63,14 @@
 
 .ia-input-container {
   display: flex;
-  padding: 15px;
-  background: #111827;
-  border-top: 1px solid #222;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 15px;
+
+  padding-bottom: 20px;
 }
 
 .ia-input {
@@ -135,13 +153,7 @@
     height:10px;
   }
 }
-.ia-container{
-  display:flex;
-  gap:20px;
-  height:100vh;
-  padding:20px;
-  background:#081229;
-}
+
 
 .avatar-container {
   width: 260px;
@@ -169,22 +181,7 @@
   object-fit: cover;
 }
 
-.ia-chat{
-  flex:1;
 
-  display:flex;
-  flex-direction:column;
-
-  overflow-y:auto;
-
-  padding:20px;
-
-  background:rgba(255,255,255,.03);
-
-  border-radius:25px;
-
-  backdrop-filter: blur(12px);
-}
 .avatar-thinking{
   animation: thinkingGlow 1s infinite alternate;
 }
