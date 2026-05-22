@@ -63,6 +63,13 @@ export default function AdminDashboard({ user, logout }: Props) {
           )}
 
           <Outlet />
+          <button
+  className="ia-button"
+  onClick={() => navigate("/admin/asistente-ia")}
+>
+  ✨
+  <span className="ia-badge">1</span>
+</button>
         </main>
       </div>
     </Layout>

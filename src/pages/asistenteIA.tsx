@@ -8,10 +8,11 @@ interface Mensaje {
 
 export default function AsistenteIA() {
   const [mensaje, setMensaje] = useState("");
+  const [escuchando, setEscuchando] = useState(false);
 
   const [mensajes, setMensajes] = useState<Mensaje[]>([
     {
-      texto: "👋 Hola, soy el asistente inteligente del sistema.",
+      texto: "👋 Hola, soy tonywilly assitent.",
       tipo: "ia",
     },
   ]);
@@ -34,14 +35,21 @@ export default function AsistenteIA() {
   recognition.start();
 
   recognition.onstart = () => {
+    setEscuchando(true);
     console.log("🎤 Escuchando...");
   };
 
   recognition.onresult = (event: any) => {
-    const texto = event.results[0][0].transcript;
+    setEscuchando(false);
+  const texto = event.results[0][0].transcript;
 
-    setMensaje(texto);
-  };
+  setMensaje(texto);
+
+  // 🔥 enviar automáticamente
+  setTimeout(() => {
+    enviarMensajeVoz(texto);
+  }, 500);
+};
 
   recognition.onerror = () => {
     alert("Error usando micrófono");
@@ -57,6 +65,52 @@ export default function AsistenteIA() {
   speech.pitch = 1;
 
   window.speechSynthesis.speak(speech);
+};
+  const enviarMensajeVoz = async (textoVoz: string) => {
+
+  const nuevoMensaje: Mensaje = {
+    texto: textoVoz,
+    tipo: "usuario",
+  };
+
+  setMensajes((prev) => [...prev, nuevoMensaje]);
+
+  setEscribiendo(true);
+
+  setTimeout(() => {
+
+    let respuesta = "";
+
+    const texto = textoVoz.toLowerCase();
+
+    if (texto.includes("stock")) {
+      respuesta = "📦 Hay 5 productos con stock bajo.";
+    }
+    else if (texto.includes("ventas")) {
+      respuesta = "💰 Las ventas de hoy son $152.000.";
+    }
+    else if (texto.includes("turno")) {
+      respuesta = "🧾 El turno actual lleva 14 ventas.";
+    }
+    else if (texto.includes("hola")) {
+      respuesta = "👋 Hola, ¿en qué puedo ayudarte?";
+    }
+    else {
+      respuesta = "🤖 No encontré información.";
+    }
+
+    const respuestaIA: Mensaje = {
+      texto: respuesta,
+      tipo: "ia",
+    };
+
+    setMensajes((prev) => [...prev, respuestaIA]);
+
+    hablarTexto(respuesta);
+
+    setEscribiendo(false);
+
+  }, 1000);
 };
 
   const enviarMensaje = async () => {
@@ -121,6 +175,14 @@ export default function AsistenteIA() {
       <div className="ia-header">
         🤖 Asistente IA
       </div>
+      <video
+      autoPlay
+      loop
+      muted
+      className="avatar-video"
+    >
+      <source src="/avatar.mp4" type="video/mp4" />
+    </video>
 
       <div className="ia-chat">
 
@@ -142,6 +204,15 @@ export default function AsistenteIA() {
             🤖 escribiendo...
           </div>
         )}
+        {escuchando && (
+    <div className="audio-wave">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  )}
 
       </div>
 
