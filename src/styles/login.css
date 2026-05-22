@@ -5,17 +5,46 @@
     align-items: center;
     height: 100vh;
   
-    /* Imagen + degradado superpuesto */
-    background: 
-      linear-gradient(-45deg, rgba(15, 23, 42, 0.85), rgba(6, 95, 70, 0.85), rgba(30, 58, 138, 0.85), rgba(4, 120, 87, 0.85)),
-      url('https://i.blogs.es/0baa91/39f95492-38ee-4f16-92e1-ba5161f4a958/1366_2000.jpeg'); /* 👈 poné tu imagen en public/images */
-  
+    background: linear-gradient(
+  -45deg,
+  rgba(15, 23, 42, 0.82),
+  rgba(6, 95, 70, 0.82),
+  rgba(30, 58, 138, 0.82),
+  rgba(4, 120, 87, 0.82)
+);
     background-size: 400% 400%, cover;
     background-position: center;
     animation: gradientBG 15s ease infinite;
     position: relative;
     overflow: hidden;
   }
+  .login-video{
+  position:absolute;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  z-index:-2;
+}
+
+.overlay{
+  position:absolute;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:100%;
+
+  background:rgba(0,0,0,0.45);
+
+  z-index:-1;
+}
   
   @keyframes gradientBG {
     0% {background-position: 0% 50%;}
@@ -211,3 +240,61 @@
       font-size: 1.5rem;
     }
   }
+  .startup-intro{
+  position:fixed;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:100%;
+
+  background:black;
+
+  z-index:99999;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  overflow:hidden;
+}
+
+.startup-video{
+  position:absolute;
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+}
+
+.startup-overlay{
+  position:relative;
+
+  z-index:2;
+
+  text-align:center;
+
+  color:white;
+}
+
+.startup-overlay h1{
+  font-size:60px;
+
+  letter-spacing:8px;
+
+  color:#00f7ff;
+
+  text-shadow:
+    0 0 20px #00f7ff,
+    0 0 40px #00f7ff;
+}
+
+.startup-overlay p{
+  margin-top:20px;
+
+  font-size:20px;
+
+  opacity:.8;
+}

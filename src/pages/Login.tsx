@@ -15,6 +15,7 @@ export default function Login({ setUser }: LoginProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [role, setRole] = useState<'admin' | 'cajero'>('admin');
+  const [showIntro, setShowIntro] = useState(false);
   const navigate = useNavigate();
   // 🔹 LOGIN FUNCTION
   const handleSubmit = async (e: React.FormEvent) => {
@@ -56,13 +57,18 @@ export default function Login({ setUser }: LoginProps) {
       };
 
       setUser(loggedUser);
-      alert("Inicio de sesión exitoso ✅");
+      setShowIntro(true);
+      
       // 🔹 Redirige según el rol
-      if (data.rol.toLowerCase() === "admin") {
-        navigate("/admin");
-      } else {
-        navigate("/cajero");
-      }
+      setTimeout(() => {
+
+  if (data.rol.toLowerCase() === "admin") {
+    navigate("/admin");
+  } else {
+    navigate("/cajero");
+  }
+
+}, 5000);
 
     } catch (error) {
       console.error("Error de login:", error);
@@ -74,6 +80,33 @@ export default function Login({ setUser }: LoginProps) {
 
   return (
     <div className="login-page">
+      <video
+    autoPlay
+    loop
+    
+    playsInline
+    className="login-video"
+  >
+    <source src="/intro.mp4" type="video/mp4" />
+  </video>
+  {showIntro && (
+  <div className="startup-intro">
+
+    <video
+      autoPlay
+      
+      className="startup-video"
+    >
+      <source src="/startup.mp4" type="video/mp4" />
+    </video>
+
+    <div className="startup-overlay">
+      <h1>TW STORE AI</h1>
+      <p>Inicializando sistema inteligente...</p>
+    </div>
+
+  </div>
+)}
       <div className="login-card">
         <h2>Iniciar Sesión</h2>
         <form onSubmit={handleSubmit}>
