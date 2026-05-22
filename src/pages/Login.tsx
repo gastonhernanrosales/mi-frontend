@@ -68,7 +68,7 @@ export default function Login({ setUser }: LoginProps) {
     navigate("/cajero");
   }
 
-}, 5000);
+}, 30000);
 
     } catch (error) {
       console.error("Error de login:", error);
