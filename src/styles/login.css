@@ -240,37 +240,54 @@
       font-size: 1.5rem;
     }
   }
- .startup-intro{
-  position:fixed;
+.startup-intro{
+  position: fixed;
 
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
 
-  width:100%;
-  height:100vh;
+  width: 100vw;
+  height: 100vh;
 
-  background:black;
+  background: black;
 
-  z-index:999999;
+  overflow: hidden;
 
-  overflow:hidden;
+  z-index: 999999;
 }
 
 .startup-video{
-  width:100%;
-  height:100%;
+  width: 100%;
+  height: 100%;
 
-  object-fit:cover;
+  object-fit: cover;
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  filter:
+    brightness(.6)
+    contrast(1.1)
+    saturate(1.2);
 }
 
 .startup-overlay{
-  position:relative;
+  position: absolute;
 
-  z-index:2;
+  top: 50%;
+  left: 50%;
 
-  text-align:center;
+  transform: translate(-50%, -50%);
 
-  color:white;
+  z-index: 2;
+
+  text-align: center;
+
+  color: white;
+
+  width: 100%;
 }
 
 .startup-overlay h1{
