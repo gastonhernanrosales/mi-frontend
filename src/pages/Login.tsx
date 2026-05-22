@@ -59,16 +59,12 @@ export default function Login({ setUser }: LoginProps) {
       setUser(loggedUser);
       setShowIntro(true);
       
-      // 🔹 Redirige según el rol
-      setTimeout(() => {
+      localStorage.setItem(
+  "redirectRole",
+  data.rol.toLowerCase()
+);
 
-  if (data.rol.toLowerCase() === "admin") {
-    navigate("/admin");
-  } else {
-    navigate("/cajero");
-  }
-
-}, 30000);
+setShowIntro(true);
 
     } catch (error) {
       console.error("Error de login:", error);
@@ -85,12 +81,24 @@ export default function Login({ setUser }: LoginProps) {
       <div className="startup-intro">
 
         <video
-          autoPlay
-          playsInline
-          className="startup-video"
-        >
-          <source src="/startup.mp4" type="video/mp4" />
-        </video>
+  autoPlay
+  playsInline
+  className="startup-video"
+  onEnded={() => {
+
+    const role =
+      localStorage.getItem("redirectRole");
+
+    if (role === "admin") {
+      navigate("/admin");
+    } else {
+      navigate("/cajero");
+    }
+
+  }}
+>
+  <source src="/startup.mp4" type="video/mp4" />
+</video>
 
       </div>
 
