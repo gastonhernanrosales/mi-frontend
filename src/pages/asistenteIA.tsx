@@ -175,14 +175,19 @@ export default function AsistenteIA() {
       <div className="ia-header">
         🤖 Asistente IA
       </div>
-      <video
-      autoPlay
-      loop
-      muted
-      className="avatar-video"
-    >
-      <source src="/avatar.mp4" type="video/mp4" />
-    </video>
+      <div className="avatar-container">
+
+  <video
+    autoPlay
+    loop
+    muted
+    playsInline
+    className="avatar-video"
+  >
+    <source src="/avatar.mp4" type="video/mp4" />
+  </video>
+
+</div>
 
       <div className="ia-chat">
 
