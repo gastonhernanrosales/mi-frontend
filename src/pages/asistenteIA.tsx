@@ -10,7 +10,8 @@ export default function AsistenteIA() {
   const [mensaje, setMensaje] = useState("");
   const [escuchando, setEscuchando] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-
+  const [pensando, setPensando] = useState(false);
+  const [hablando, setHablando] = useState(false);
   const [mensajes, setMensajes] = useState<Mensaje[]>([
     {
       texto: "👋 Hola, soy tonywilly assitent.",
@@ -61,7 +62,7 @@ export default function AsistenteIA() {
     videoRef.current.currentTime = 0;
     videoRef.current.play();
   }
-
+  setHablando(true);
   const speech = new SpeechSynthesisUtterance(texto);
 
   speech.lang = "es-ES";
@@ -71,11 +72,12 @@ export default function AsistenteIA() {
   speech.pitch = 1;
 
   speech.onend = () => {
+    setHablando(false);
     if(videoRef.current){
       videoRef.current.pause();
     }
   };
-
+  
   window.speechSynthesis.speak(speech);
 };
   const enviarMensajeVoz = async (textoVoz: string) => {
@@ -88,6 +90,7 @@ export default function AsistenteIA() {
   setMensajes((prev) => [...prev, nuevoMensaje]);
 
   setEscribiendo(true);
+  setPensando(true);
 
   setTimeout(() => {
 
@@ -121,6 +124,7 @@ export default function AsistenteIA() {
     hablarTexto(respuesta);
 
     setEscribiendo(false);
+    setPensando(false);
 
   }, 1000);
 };
@@ -189,16 +193,25 @@ export default function AsistenteIA() {
       </div>
       <div className="avatar-container">
 
-  <video
+  <video className={`avatar-video ${pensando ? "avatar-thinking" : ""}`}
     ref={videoRef}
     
     
     muted
     playsInline
-    className="avatar-video"
+    
   >
     <source src="/avatar.mp4" type="video/mp4" />
   </video>
+  {hablando && (
+    <div className="audio-wave">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  )}
 
 </div>
 

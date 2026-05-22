@@ -90,45 +90,49 @@
   align-items: center;
   justify-content: center;
 }
-.audio-wave {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  margin-top: 10px;
+.audio-wave{
+  display:flex;
+  gap:6px;
+  justify-content:center;
+  align-items:center;
+  margin-top:10px;
 }
 
-.audio-wave span {
-  width: 5px;
-  height: 20px;
-  background: #00f7ff;
-  border-radius: 20px;
-  animation: wave 1s infinite ease-in-out;
+.audio-wave span{
+  width:6px;
+  height:20px;
+  background:#00f7ff;
+  border-radius:10px;
+  animation:wave 1s infinite ease-in-out;
 }
 
-.audio-wave span:nth-child(2) {
-  animation-delay: 0.1s;
+.audio-wave span:nth-child(2){
+  animation-delay:.2s;
 }
 
-.audio-wave span:nth-child(3) {
-  animation-delay: 0.2s;
+.audio-wave span:nth-child(3){
+  animation-delay:.4s;
 }
 
-.audio-wave span:nth-child(4) {
-  animation-delay: 0.3s;
+.audio-wave span:nth-child(4){
+  animation-delay:.6s;
 }
 
-.audio-wave span:nth-child(5) {
-  animation-delay: 0.4s;
+.audio-wave span:nth-child(5){
+  animation-delay:.8s;
 }
 
-@keyframes wave {
-  0%, 100% {
-    transform: scaleY(1);
+@keyframes wave{
+  0%{
+    height:10px;
   }
 
-  50% {
-    transform: scaleY(2.5);
+  50%{
+    height:40px;
+  }
+
+  100%{
+    height:10px;
   }
 }
 .ia-container{
@@ -147,6 +151,9 @@
 }
 
 .avatar-video{
+  filter:
+    drop-shadow(0 0 10px #00f7ff)
+    brightness(1.05);
   width:100%;
   max-height:80vh;
 
@@ -176,4 +183,21 @@
   border-radius:25px;
 
   backdrop-filter: blur(12px);
+}
+.avatar-thinking{
+  animation: thinkingGlow 1s infinite alternate;
+}
+
+@keyframes thinkingGlow{
+  from{
+    box-shadow:
+      0 0 20px #00f7ff,
+      0 0 40px #00f7ff;
+  }
+
+  to{
+    box-shadow:
+      0 0 40px #00f7ff,
+      0 0 80px #00f7ff;
+  }
 }
