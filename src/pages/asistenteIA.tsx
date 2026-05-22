@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "../styles/asistenteIA.css";
-
+import { useRef } from "react";
 interface Mensaje {
   texto: string;
   tipo: "usuario" | "ia";
@@ -9,6 +9,7 @@ interface Mensaje {
 export default function AsistenteIA() {
   const [mensaje, setMensaje] = useState("");
   const [escuchando, setEscuchando] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const [mensajes, setMensajes] = useState<Mensaje[]>([
     {
@@ -56,6 +57,11 @@ export default function AsistenteIA() {
   };
 };
   const hablarTexto = (texto: string) => {
+  if(videoRef.current){
+    videoRef.current.currentTime = 0;
+    videoRef.current.play();
+  }
+
   const speech = new SpeechSynthesisUtterance(texto);
 
   speech.lang = "es-ES";
@@ -63,6 +69,12 @@ export default function AsistenteIA() {
   speech.rate = 1;
 
   speech.pitch = 1;
+
+  speech.onend = () => {
+    if(videoRef.current){
+      videoRef.current.pause();
+    }
+  };
 
   window.speechSynthesis.speak(speech);
 };
@@ -178,8 +190,9 @@ export default function AsistenteIA() {
       <div className="avatar-container">
 
   <video
-    autoPlay
-    loop
+    ref={videoRef}
+    
+    
     muted
     playsInline
     className="avatar-video"
