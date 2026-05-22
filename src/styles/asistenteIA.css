@@ -1,12 +1,16 @@
-.ia-container {
-  display: flex;
-  flex-direction: column;
+.ia-container{
+  display:flex;
+  flex-direction:column;
 
-  height: 100vh;
+  gap:20px;
 
-  padding: 20px;
+  height:calc(100vh - 80px);
 
-  overflow: hidden;
+  padding:20px;
+
+  overflow:hidden;
+
+  background:#081229;
 }
 
 .ia-header {
@@ -19,24 +23,21 @@
   border-bottom: 1px solid #222;
 }
 
-.ia-chat {
-  flex: 1;
+.ia-chat{
+  flex:1;
 
-  overflow-y: auto;
+  overflow-y:auto;
 
-  margin-top: 20px;
+  padding:20px;
 
-  padding: 20px;
+  background:rgba(255,255,255,.03);
 
-  border-radius: 20px;
+  border-radius:25px;
 
-  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(12px);
 
-  backdrop-filter: blur(10px);
-
-  min-height: 250px;
+  min-height: 200px;
 }
-
 
 .mensaje {
   max-width: 70%;
@@ -156,13 +157,8 @@
 
 
 .avatar-container {
-  width: 280px;
-
-  height: 380px;
-
-  min-height: 380px;
-
-  flex-shrink: 0;
+  width: 220px;
+  height: 220px;
 
   border-radius: 25px;
 
@@ -176,17 +172,24 @@
 
   position: relative;
 
-  margin: 20px auto;
+  margin: 0 auto 20px auto;
+
+  flex-shrink: 0;
+
+  background: #000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .avatar-video {
   width: 100%;
   height: 100%;
 
-  
-  object-fit: contain;
+  object-fit: cover;
 
-  background: black;
+  object-position: center top;
 }
 
 
