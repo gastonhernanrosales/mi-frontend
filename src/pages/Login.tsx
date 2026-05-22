@@ -79,6 +79,26 @@ export default function Login({ setUser }: LoginProps) {
   };
 
   return (
+    <>
+    {showIntro ? (
+
+      <div className="startup-intro">
+
+        <video
+          autoPlay
+          className="startup-video"
+        >
+          <source src="/startup.mp4" type="video/mp4" />
+        </video>
+
+        <div className="startup-overlay">
+          <h1>TW STORE AI</h1>
+          <p>Inicializando sistema inteligente...</p>
+        </div>
+
+      </div>
+
+    ):(
     <div className="login-page">
       <video
     autoPlay
@@ -89,24 +109,10 @@ export default function Login({ setUser }: LoginProps) {
   >
     <source src="/intro.mp4" type="video/mp4" />
   </video>
-  {showIntro && (
-  <div className="startup-intro">
+  
 
-    <video
-      autoPlay
-      
-      className="startup-video"
-    >
-      <source src="/startup.mp4" type="video/mp4" />
-    </video>
+    
 
-    <div className="startup-overlay">
-      <h1>TW STORE AI</h1>
-      <p>Inicializando sistema inteligente...</p>
-    </div>
-
-  </div>
-)}
       <div className="login-card">
         <h2>Iniciar Sesión</h2>
         <form onSubmit={handleSubmit}>
@@ -159,5 +165,7 @@ export default function Login({ setUser }: LoginProps) {
         </form>
       </div>
     </div>
+    )}
+ </>
   );
 }
