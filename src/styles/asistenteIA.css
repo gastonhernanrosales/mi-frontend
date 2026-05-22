@@ -209,6 +209,21 @@
     0 0 20px #00f7ff,
     0 0 50px rgba(0,247,255,.4);
 }
+.avatar-container::after{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,.2),
+      transparent
+    );
+
+  pointer-events:none;
+}
 
 .avatar-video{
   width:100%;
@@ -217,7 +232,7 @@
   object-fit:cover;
 
   /* IMPORTANTE */
-  object-position:center;
+  object-position:35%  center;
 }
 
 
