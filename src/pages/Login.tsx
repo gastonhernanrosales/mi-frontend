@@ -15,7 +15,7 @@ export default function Login({ setUser }: LoginProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [role, setRole] = useState<'admin' | 'cajero'>('admin');
-  const [showIntro, setShowIntro] = useState(false);
+  
   const navigate = useNavigate();
   // 🔹 LOGIN FUNCTION
   const handleSubmit = async (e: React.FormEvent) => {
@@ -57,14 +57,14 @@ export default function Login({ setUser }: LoginProps) {
       };
 
       setUser(loggedUser);
-      setShowIntro(true);
-      
-      localStorage.setItem(
-  "redirectRole",
-  data.rol.toLowerCase()
-);
 
-setShowIntro(true);
+if (data.rol.toLowerCase() === "admin") {
+  navigate("/startup/admin");
+} else {
+  navigate("/startup/cajero");
+}
+
+
 
     } catch (error) {
       console.error("Error de login:", error);
@@ -75,34 +75,7 @@ setShowIntro(true);
   };
 
   return (
-  <>
-    {showIntro ? (
-
-      <div className="startup-intro">
-
-        <video
-  autoPlay
-  playsInline
-  className="startup-video"
-  onEnded={() => {
-
-    const role =
-      localStorage.getItem("redirectRole");
-
-    if (role === "admin") {
-      navigate("/admin");
-    } else {
-      navigate("/cajero");
-    }
-
-  }}
->
-  <source src="/startup.mp4" type="video/mp4" />
-</video>
-
-      </div>
-
-    ) : (
+  
 
       <div className="login-page">
 
@@ -185,6 +158,5 @@ setShowIntro(true);
 
       </div>
 
-    )}
-  </>
+    
 );}

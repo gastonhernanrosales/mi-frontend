@@ -19,6 +19,7 @@ import TurnoCaja from './pages/TurnoCaja';
 import TurnosAdminPanel from './pages/TurnosAdminPanel';
 import TurnoDetalle from './pages/TurnoDetalle';
 import AsistenteIA from './pages/asistenteIA';
+import Startup from './pages/startup';
 export default function App() {
   
   
@@ -52,6 +53,10 @@ function AppRoutes({ user, setUser }: { user: User | null; setUser: (u: User | n
     <Routes>
       
       <Route path="/login" element={<Login setUser={setUser} />} />
+      <Route
+  path="/startup/:role"
+  element={<Startup />}
+/>
 
       {/* ADMIN */}
       <Route element={<PrivateRoute user={user} role="admin" />}>
